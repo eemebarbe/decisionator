@@ -1,4 +1,4 @@
-# "Paralysis by analysis"
+# "Paralysis by Analysis"
 
 It's difficult to quantify all of the factors that go into why you should do this thing instead of that thing. And when you think about it, it's also very concerning how informal our decision making tends to be. Shouldn't we be as technical as possible when it comes to making life-defining choices?
 
