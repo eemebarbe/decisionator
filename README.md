@@ -22,4 +22,4 @@ All of the weighted values of the properties for that option are added together,
 
 This is a simple approach, but there are additional parameters that could considered. For example, a property's value could hypothetically scale with the value of another property. Optimally, the scaling should be weighted against an appropriate mathematical function, in the case that the strength of the scaling changes based on the property's score.
 
-`scaled_score = sigmoid(property_score)`
+`scaled_property_score = sigmoid(property_score)`
