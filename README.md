@@ -1,46 +1,25 @@
-# Getting Started with Create React App
+# "Paralysis by analysis"
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It's difficult to quantify all of the factors that go into why you should do this thing instead of that thing. And when you think about it, it's also very concerning how informal our decision making tends to be. Shouldn't we be as technical as possible when it comes to making life-defining choices?
 
-## Available Scripts
+I have a long list of things I want to do with my life, more than I'll ever be able to do. Yet, I often find myself doing none of them, lost in a sense of indecision, pulled by my heart in a million different directions. To combat this, I came up with a simple formula to try and make a path forward more clear for myself:
 
-In the project directory, you can run:
+I create a set of properties for each option I'm considering. These properties are things that I want more of in my life, or things that I want to improve.
 
-### `npm start`
+`properties = {...}`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Each one of these properties is given a "weight", based on how I prioritize the importance of one property over another.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+`properties[x].weight = weight`
 
-### `npm test`
+I create grades for how much each option optimizes for each property. I then multiply the grade by the weight.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`property_score = grade * weight`
 
-### `npm run build`
+All of the weighted values of the properties for that option are added together, creating the score for that option. Whichever option has the highest score is prioritized.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`option_score = property_score[0] + property_score[1] + property_score[2] ... property_score[n]`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This is a simple approach, but there are additional parameters that could considered. For example, a property's value could hypothetically scale with the value of another property. Optimally, the scaling should be weighted against an appropriate mathematical function, in the case that the strength of the scaling changes based on the property's score.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+`scaled_score = sigmoid(property_score)`
