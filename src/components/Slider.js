@@ -26,16 +26,7 @@ const StyledSlider = styled.input`
 `
 
 const Slider = (props) => {
-    return (
-        <StyledSlider
-            type="range"
-            min={props.range[0]}
-            max={props.range[1]}
-            step="0.05"
-            onChange={props.onChange}
-            id="myRange"
-        />
-    )
+    return <StyledSlider type="range" min={props.range[0]} max={props.range[1]} step="0.1" onChange={props.onChange} />
 }
 
 export default Slider
