@@ -27,6 +27,7 @@ import Breadcrumbs from "./Breadcrumbs"
 import Alert from "./Alert"
 import Badge from "./Badge"
 import Rating from "./Rating"
+import Header from "./Header"
 import { Grid, Item } from "./Grid"
 import Card from "./Card"
 import FunctionForm from "./FunctionForm"
@@ -60,6 +61,7 @@ export {
     PhotoFrame,
     PhotoContainer,
     Checkbox,
+    Header,
     Note,
     TextArea,
     Breadcrumbs,
