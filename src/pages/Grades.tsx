@@ -1,43 +1,91 @@
-import React, { useState } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import styled from "styled-components"
+import { Form, H1, Slider, Card, H2, P } from "../components"
 import { metrics } from "../themes"
-import { BodyWrapper, Form, H1, Input, Slider, Button } from "../components"
-import { useLocation, useNavigate } from "react-router-dom"
+import { UserContext } from "../contexts/userContext"
 
 interface Option {
+    id: number
     name: string
     scores?: {
-        [key: string]: number
+        [key: number]: number
     }
     finalScore?: number
 }
 
+interface Property {
+    id: number
+    weight: number
+    name: string
+}
+
 function Grades() {
-    const [options, setOptions] = useState<Array<Option>>([])
+    const { userState, userDispatch } = useContext(UserContext)
+
+    useEffect(() => {
+        let scoreConstructor = {}
+        userState.properties.forEach((x) => (scoreConstructor[x.id] = 0))
+        userState.options.map((option: Option) =>
+            userDispatch({
+                type: "UPDATE_OPTION",
+                payload: { ...option, scores: scoreConstructor },
+            })
+        )
+    }, [])
 
     const optionGrader = () => {
-        options.map((x) => {})
+        return userState.options.map((option: Option) => {
+            return (
+                <Card>
+                    <H2>{option.name}</H2>
+                    {renderSliders(option)}
+                </Card>
+            )
+        })
+    }
+
+    const renderSliders = (option: Option) => {
+        return userState.properties.map((property: Property) => {
+            const optionScore = option.scores ? option.scores[property.id] : 0
+            return (
+                <SliderContainer>
+                    <Alignment>
+                        <P>{property.name}</P>
+                        <P>{optionScore}/10</P>
+                    </Alignment>
+                    <Slider
+                        marginBottom
+                        value={optionScore}
+                        range={[0, 10]}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                            userDispatch({
+                                type: "UPDATE_OPTION",
+                                payload: { ...option, scores: { ...option.scores, [property.id]: e.target.value } },
+                            })
+                        }
+                    />
+                </SliderContainer>
+            )
+        })
     }
 
     return (
         <>
             <H1>Grade Your Options</H1>
-            <Form></Form>
+            <P>Determine how well each one of your options optimizes for each of your chosen parameters.</P>
+            <Form>{optionGrader()}</Form>
         </>
     )
 }
 
-const Entry = styled.li`
-    list-style-type: none;
-    margin: 0;
-    padding: ${metrics.baseUnit * 2}px;
+const Alignment = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: ${metrics.baseUnit * 12}px;
-    border: 1px solid ${(props) => props.theme.inactive};
-    border-radius: ${metrics.baseUnit / 2}px;
-    font-size: ${metrics.regularText}px;
+`
+
+const SliderContainer = styled.div`
+    margin-bottom: ${metrics.baseUnit * 3}px;
 `
 
 export default Grades

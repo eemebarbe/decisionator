@@ -40,7 +40,7 @@ function CreateProperties() {
                             marginBottom
                             marginLeft
                             small
-                            onClick={(e: React.SyntheticEvent) => deleteProperty(e, property.name)}
+                            onClick={(e: React.SyntheticEvent) => deleteProperty(e, property)}
                         >
                             Delete
                         </Button>
@@ -70,9 +70,9 @@ function CreateProperties() {
         })
     }
 
-    const deleteProperty = (e: React.SyntheticEvent, name: string) => {
+    const deleteProperty = (e: React.SyntheticEvent, property: Property) => {
         e.preventDefault()
-        userDispatch({ type: "DELETE_PROPERTY", payload: name })
+        userDispatch({ type: "DELETE_PROPERTY", payload: property.id })
     }
 
     return (

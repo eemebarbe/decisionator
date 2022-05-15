@@ -7,6 +7,7 @@ import GlobalStyle from "./themes/GlobalStyle"
 import Properties from "./pages/Properties"
 import Options from "./pages/Options"
 import Grades from "./pages/Grades"
+import Results from "./pages/Results"
 
 function App() {
     const [page, setPage] = useState(0)
@@ -24,15 +25,15 @@ function App() {
     }, [])
 
     const pageList = () => {
-        return [<Properties />, <Options />, <Grades />]
+        return [<Properties />, <Options />, <Grades />, <Results />]
     }
 
     const disableNextButton = () => {
-        console.log(userState.properties)
-        if (page === 0 && userState.properties.length) {
-            console.log()
+        if (page === 0 && userState.properties[0] && userState.properties[0].name) {
             return false
         } else if (page === 1 && userState.options.length) {
+            return false
+        } else if (page === 2) {
             return false
         }
         return true
