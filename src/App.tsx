@@ -28,7 +28,7 @@ function App() {
     }
 
     const disableNextButton = () => {
-        console.log(page, userState.properties)
+        console.log(userState.properties)
         if (page === 0 && userState.properties.length) {
             console.log()
             return false
@@ -46,17 +46,19 @@ function App() {
                 <BodyWrapper>
                     <ProgressBar current={page} length={pageList().length} />
                     {pageList()[page]}
-                    <Alignment>
-                        <Navigation>
+                </BodyWrapper>
+                <Alignment>
+                    <Navigation>
+                        <div>
                             <Button disabled={!page} onClick={() => setPage(page - 1)}>
                                 Previous Step
                             </Button>
                             <Button disabled={disableNextButton()} onClick={() => setPage(page + 1)}>
                                 Next Step
                             </Button>
-                        </Navigation>
-                    </Alignment>
-                </BodyWrapper>
+                        </div>
+                    </Navigation>
+                </Alignment>
             </AppWrapper>
         </ThemeProvider>
     )
@@ -78,16 +80,22 @@ const Alignment = styled.div`
 const Navigation = styled.div`
     position: absolute;
     bottom: 0;
+    width: 100%;
     display: flex;
-    flex-grow: 1;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    height: ${metrics.baseUnit * 12}px;
-    margin-bottom: ${metrics.baseUnit * 3}px;
-    padding: ${metrics.baseUnit * 3}px;
-    border-radius: ${metrics.globalBorderRadius}px;
-    width: ${metrics.bodyWidth}px;
-    background-color: ${(props) => props.theme.secondLayerBackground};
+    div {
+        box-shadow: ${(props) => `0 1px ${metrics.baseUnit / 2}px 0 ${props.theme.shadow}`};
+        width: ${metrics.bodyWidth}px;
+        background-color: ${(props) => props.theme.secondLayerBackground};
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: ${metrics.baseUnit * 12}px;
+        border-radius: ${metrics.globalBorderRadius}px;
+        margin-bottom: ${metrics.baseUnit * 3}px;
+        padding: ${metrics.baseUnit * 3}px;
+    }
 `
 
 export default App

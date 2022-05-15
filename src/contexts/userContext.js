@@ -14,11 +14,15 @@ const reducer = (state, action) => {
         case "ADD_PROPERTY":
             return { ...state, properties: [...state.properties, action.payload] }
         case "UPDATE_PROPERTY":
-            return { ...state, properties: [...state.properties, action.payload] }
+            let newProps = state.properties
+            const index = state.properties.findIndex((x) => x.id === action.payload.id)
+            newProps[index] = action.payload
+            return {
+                ...state,
+                properties: [...newProps],
+            }
         case "DELETE_PROPERTY":
             return { ...state, properties: [...state.properties.filter((x) => x.name !== action.payload)] }
-        case "ADD_OPTION":
-            return { ...state, options: [...state.options, action.payload] }
         case "UPDATE_OPTION":
             return { ...state, options: [...state.options, action.payload] }
         case "DELETE_OPTION":

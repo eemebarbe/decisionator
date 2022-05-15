@@ -7,11 +7,9 @@ import { UserProvider } from "./contexts/userContext"
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
-    <React.StrictMode>
-        <UserProvider>
-            <App />
-        </UserProvider>
-    </React.StrictMode>
+    <UserProvider>
+        <App />
+    </UserProvider>
 )
 
 // If you want to start measuring performance in your app, pass a function
