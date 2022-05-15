@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from "react"
 import styled from "styled-components"
-import { useNavigate } from "react-router-dom"
 import { metrics } from "../themes"
 
 const BodyOuter = styled.div`
@@ -12,34 +11,6 @@ const BodyOuter = styled.div`
     overflow: hidden;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    &.fade-appear,
-    &.fade-enter {
-        opacity: 0;
-        z-index: 1;
-        transform: translateX(${(props) => (props.action === "PUSH" ? "24px" : "-24px")});
-        @media (max-width: 480px) {
-            transform: translateX(0px);
-        }
-    }
-    &.fade-appear-active,
-    &.fade-enter.fade-enter-active {
-        opacity: 1;
-        transform: translateX(0px);
-        transition: opacity 400ms linear 400ms, transform 400ms ease-out 400ms;
-    }
-
-    &.fade-exit {
-        opacity: 1;
-        transform: translateX(0px);
-    }
-    &.fade-exit.fade-exit-active {
-        opacity: 0;
-        transform: translateX(${(props) => (props.action === "PUSH" ? "-24px" : "24px")});
-        transition: opacity 400ms linear, transform 400ms ease-in;
-        @media (max-width: 480px) {
-            transform: translateX(0px);
-        }
-    }
 `
 
 const BodyWrapper = styled.div`
@@ -61,7 +32,6 @@ const BodyInner = styled.div`
 `
 
 const Wrapper = (props) => {
-    const history = useNavigate()
     const scrollRef = useRef()
     const [scrollbarWidth, setScrollbarWidth] = useState(0)
 
@@ -78,7 +48,7 @@ const Wrapper = (props) => {
     }, [])
 
     return (
-        <BodyOuter action={history.action} ref={scrollRef}>
+        <BodyOuter ref={scrollRef}>
             <BodyWrapper scrollbarWidth={scrollbarWidth}>
                 <BodyInner>{props.children}</BodyInner>
             </BodyWrapper>

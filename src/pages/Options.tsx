@@ -1,24 +1,23 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import { metrics } from "../themes"
-import { BodyWrapper, Form, H1, Input, Slider, Button } from "../components"
-import { useLocation, useNavigate } from "react-router-dom"
+import { Form, H1, P, Input, Button, Card } from "../components"
+import { UserContext } from "../contexts/userContext"
 
 interface Option {
     name: string
-    scores?: {
+    grades?: {
         [key: string]: number
     }
     finalScore?: number
 }
 
 function Options() {
-    const [options, setOptions] = useState<Array<Option>>([])
+    const { userState, userDispatch } = useContext(UserContext)
     const [inputValue, setInputValue] = useState<string>("")
-    const history = useNavigate()
 
     const entries = () => {
-        return options.map((x) => {
+        return userState.options.map((x) => {
             return (
                 <Entry>
                     <span>{x.name}</span>
@@ -32,30 +31,46 @@ function Options() {
 
     const deleteProperty = (e: React.SyntheticEvent, name: string) => {
         e.preventDefault()
-        let newOptions = [...options]
-        setOptions(newOptions.filter((x) => x.name !== name))
+        userDispatch({ type: "DELETE_OPTION", payload: name })
     }
 
     const addEntry = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        inputValue && setOptions([...options, { name: inputValue }])
+        inputValue &&
+            userDispatch({
+                type: "ADD_OPTION",
+                payload: { name: inputValue },
+            })
     }
 
     return (
-        <BodyWrapper>
+        <>
             <H1>Create Options</H1>
-            <Button onClick={() => history(-1)}>Previous Step</Button>
-            <Button onClick={() => history("/grades")}>Next Step</Button>
-            <Form>
-                <Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-                <Button marginBottom onClick={(e: React.SyntheticEvent) => addEntry(e)}>
-                    Add option
-                </Button>
-                {entries()}
-            </Form>
-        </BodyWrapper>
+            <P>List every option that you're choosing between.</P>
+            <Card>
+                <Form>
+                    <Alignment>
+                        <Input
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            placeholder="Name of option"
+                        />
+                        <Button disabled={!inputValue} onClick={(e: React.SyntheticEvent) => addEntry(e)}>
+                            Add option
+                        </Button>
+                    </Alignment>
+                </Form>
+            </Card>
+            <Entries>{entries()}</Entries>
+        </>
     )
 }
+
+const Alignment = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
 
 const Entry = styled.li`
     list-style-type: none;
@@ -68,6 +83,13 @@ const Entry = styled.li`
     border: 1px solid ${(props) => props.theme.inactive};
     border-radius: ${metrics.baseUnit / 2}px;
     font-size: ${metrics.regularText}px;
+`
+
+const Entries = styled.ul`
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: ${metrics.baseUnit * 3}px;
 `
 
 export default Options

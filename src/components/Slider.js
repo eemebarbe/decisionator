@@ -6,8 +6,8 @@ const StyledSlider = styled.input`
     height: ${metrics.baseUnit * 4}px;
     display: flex;
     align-items: center;
-    margin-bottom: ${metrics.baseUnit * 2}px;
-    height: ${metrics.baseUnit / 2}px;
+    margin-bottom: ${metrics.baseUnit}px;
+    height: ${metrics.baseUnit}px;
     appearance: none;
     width: 100%;
     border-radius: ${metrics.globalBorderRadius}px;
@@ -26,7 +26,16 @@ const StyledSlider = styled.input`
 `
 
 const Slider = (props) => {
-    return <StyledSlider type="range" min={props.range[0]} max={props.range[1]} step="0.1" onChange={props.onChange} />
+    return (
+        <StyledSlider
+            type="range"
+            min={props.range[0]}
+            max={props.range[1]}
+            step="0.1"
+            onChange={props.onChange}
+            value={props.value}
+        />
+    )
 }
 
 export default Slider

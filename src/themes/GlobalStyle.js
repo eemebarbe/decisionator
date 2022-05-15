@@ -2,7 +2,6 @@ import { metrics } from "../themes"
 import { createGlobalStyle, css } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:wght@100;300;700&display=swap');
   *, *:before, *:after { 
     box-sizing: border-box;
   }
@@ -21,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
     input, textarea, button {
       font-family: inherit;
     }
-    font-family: 'Work Sans', sans-serif;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif
     margin: 0;
     padding: 0;
     -webkit-font-smooth: antialiased;
@@ -46,29 +45,26 @@ export const GlobalStyle = createGlobalStyle`
   }`
 
 export const inputStyles = css`
-    background-color: transparent;
+    background-color: ${(props) => props.theme.overlayBackground};
     color: ${(props) => props.theme.mainText};
     border: none;
     border-radius: 0;
-    border: 1px solid ${(props) => props.theme.inactive};
-    border-radius: ${metrics.baseUnit / 2}px;
+    border-radius: ${metrics.globalBorderRadius}px;
     outline: none;
     margin: none;
     margin-bottom: ${metrics.baseUnit * 3}px;
     padding: 0;
-    padding-left: ${metrics.baseUnit}px;
-    height: ${metrics.baseUnit * 5}px;
+    padding-left: ${metrics.baseUnit * 2}px;
+    height: ${metrics.baseUnit * 6}px;
     width: ${metrics.baseUnit * 30}px;
     font-size: ${metrics.regularText}px;
     &::placeholder {
         color: ${(props) => props.theme.inactive};
     }
     &:focus {
-        border-bottom: 1px solid ${(props) => props.theme.mainText};
+        background-color: ${(props) => props.theme.inactive};
     }
-    box-sizing: content-box;
-    @media (max-width: 480px) {
-        width: 100%;
-    }
+    box-sizing: border-box;
+    width: 100%;
 `
 export default GlobalStyle

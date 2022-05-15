@@ -1,50 +1,14 @@
-import React, { useContext, useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
-import { Overlay, Hamburger, MenuOverlay } from "."
-import { UserContext } from "../contexts/userContext"
 import styled from "styled-components"
 import { metrics } from "../themes"
 
 const HeaderWithRouter = (props) => {
-    const [menuOpen, setMenuOpen] = useState(false)
-    const { userState } = useContext(UserContext)
-    const userId = userState.userId
-    const history = useNavigate()
-    const location = useLocation()
-
-    const pushTo = (path) => {
-        location.pathname !== path && history(path)
-    }
-
-    const toggleMenu = () => {
-        menuOpen ? setMenuOpen(false) : setMenuOpen(true)
-    }
-
-    const menuButtonState = () => {
-        return menuOpen ? null : <Hamburger notifications={userState.newMessages} onClick={toggleMenu} />
-    }
-
-    const menu = () => {
-        return (
-            <Overlay>
-                <MenuOverlay setMenuOpen={() => setMenuOpen(false)} />
-            </Overlay>
-        )
-    }
-
+    const url = "github.com/eemebarbe/decisionator"
     return (
-        <>
-            {menuOpen && menu()}
-            <Header {...props}>
-                <HeaderInner>
-                    <CompanyLogo onClick={() => (userId ? pushTo("/") : pushTo("/"))}>Deadline</CompanyLogo>
-                    <div>
-                        {userId && <WalletId>{userId}</WalletId>}
-                        {userId && menuButtonState()}
-                    </div>
-                </HeaderInner>
-            </Header>
-        </>
+        <Header {...props}>
+            <HeaderInner>
+                <CompanyLogo onClick={() => window.open("https://www." + url, "_blank")}>{url}</CompanyLogo>
+            </HeaderInner>
+        </Header>
     )
 }
 
@@ -87,14 +51,6 @@ const CompanyLogo = styled.button`
     cursor: pointer;
     outline: 0;
     font-size: ${metrics.smallText}px;
-`
-const WalletId = styled(CompanyLogo)`
-    background-color: ${(props) => props.theme.secondaryColor};
-    height: ${metrics.baseUnit * 4}px;
-    border-radius: ${metrics.baseUnit * 2}px;
-    padding: 0px ${metrics.baseUnit * 2}px;
-    font-size: ${metrics.baseFontUnit}px;
-    margin-right: ${metrics.baseUnit * 3}px;
 `
 
 export default HeaderWithRouter

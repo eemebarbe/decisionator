@@ -14,32 +14,16 @@ interface Option {
 
 function Grades() {
     const [options, setOptions] = useState<Array<Option>>([])
-    const [inputValue, setInputValue] = useState<string>("")
-    const history = useNavigate()
 
-    const deleteProperty = (e: React.SyntheticEvent, name: string) => {
-        e.preventDefault()
-        let newOptions = [...options]
-        setOptions(newOptions.filter((x) => x.name !== name))
-    }
-
-    const addEntry = (e: React.SyntheticEvent) => {
-        e.preventDefault()
-        inputValue && setOptions([...options, { name: inputValue }])
+    const optionGrader = () => {
+        options.map((x) => {})
     }
 
     return (
-        <BodyWrapper>
-            <H1>Create Options</H1>
-            <Button onClick={() => history(-1)}>Previous Step</Button>
-            <Button onClick={() => history("/grades")}>Next Step</Button>
-            <Form>
-                <Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-                <Button marginBottom onClick={(e: React.SyntheticEvent) => addEntry(e)}>
-                    Add option
-                </Button>
-            </Form>
-        </BodyWrapper>
+        <>
+            <H1>Grade Your Options</H1>
+            <Form></Form>
+        </>
     )
 }
 

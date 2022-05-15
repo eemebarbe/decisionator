@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import styled from "styled-components"
 import { metrics } from "../themes"
-import { BodyWrapper, Form, H1, Input, Slider, Button } from "../components"
-import { useLocation, useNavigate } from "react-router-dom"
+import { Form, H1, H2, Input, Slider, Button, Card, P } from "../components"
+import { UserContext } from "../contexts/userContext"
 
 interface Property {
     weight: number
@@ -10,13 +10,12 @@ interface Property {
 }
 
 function CreateProperties() {
-    const [properties, setProperties] = useState<Array<Property>>([])
+    const { userState, userDispatch } = useContext(UserContext)
     const [inputValue, setInputValue] = useState<string>("")
-    const [sliderValue, setSliderValue] = useState<number>(5)
-    const history = useNavigate()
+    const [sliderValue, setSliderValue] = useState<number>(0)
 
     const entries = () => {
-        return properties.map((x: Property) => {
+        return userState.properties.map((x: Property) => {
             return (
                 <Entry>
                     <span>{x.name}</span>
@@ -31,48 +30,83 @@ function CreateProperties() {
 
     const deleteProperty = (e: React.SyntheticEvent, name: string) => {
         e.preventDefault()
-        let newProperties = [...properties]
-        setProperties(newProperties.filter((x) => x.name !== name))
+        userDispatch({ type: "DELETE_PROPERTY", payload: name })
     }
 
     const addEntry = (e: React.SyntheticEvent) => {
         e.preventDefault()
-        inputValue && sliderValue && setProperties({ ...properties, [inputValue]: { weight: sliderValue } })
+        inputValue &&
+            sliderValue &&
+            userDispatch({
+                type: "ADD_PROPERTY",
+                payload: { weight: sliderValue, name: inputValue },
+            })
+        setInputValue("")
+        setSliderValue(0)
     }
 
     return (
-        <BodyWrapper>
+        <>
             <H1>Create Properties</H1>
-            <Button onClick={() => history("/options")}>Next Step</Button>
-            <Form>
-                <Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-                <Slider
-                    value={sliderValue}
-                    range={[0, 10]}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                        setSliderValue(parseFloat(e.target.value))
-                    }
-                />
-                <Button marginBottom onClick={(e: React.SyntheticEvent) => addEntry(e)}>
-                    Add property
-                </Button>
-                {entries()}
-            </Form>
-        </BodyWrapper>
+            <P>
+                Properties are a way of quantifying the overall value of each of your options. When coming up with
+                properties, think about things that you want more of in your life, or things that you want to improve. A
+                few examples are "fulfillment", "career opportunities", or "romantic prospects". Try not to create too
+                many properties, and make sure to combine any properties that seem too similar into one property.
+            </P>
+            <Card>
+                <Form>
+                    <Alignment>
+                        <Input
+                            value={inputValue}
+                            placeholder="Name of property"
+                            onChange={(e) => setInputValue(e.target.value)}
+                        />
+                    </Alignment>
+                    <Alignment>
+                        <H2>How important is this property to you, relative to other properties?</H2>{" "}
+                        <H2>{sliderValue}/10</H2>
+                    </Alignment>
+                    <Slider
+                        value={sliderValue}
+                        range={[0, 10]}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                            setSliderValue(parseFloat(e.target.value))
+                        }
+                    />
+                    <Button onClick={(e: React.SyntheticEvent) => addEntry(e)}>Add property</Button>
+                </Form>
+            </Card>
+            <Entries>{entries()}</Entries>
+        </>
     )
 }
 
 const Entry = styled.li`
+    margin-bottom: ${metrics.baseUnit * 3}px;
     list-style-type: none;
     margin: 0;
-    padding: ${metrics.baseUnit * 2}px;
+    padding: ${metrics.baseUnit * 3}px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: ${metrics.baseUnit * 12}px;
     border: 1px solid ${(props) => props.theme.inactive};
-    border-radius: ${metrics.baseUnit / 2}px;
+    border-radius: ${metrics.globalBorderRadius}px;
     font-size: ${metrics.regularText}px;
+`
+
+const Entries = styled.ul`
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: ${metrics.baseUnit * 3}px;
+`
+
+const Alignment = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 `
 
 export default CreateProperties
