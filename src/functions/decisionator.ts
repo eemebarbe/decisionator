@@ -1,14 +1,4 @@
-interface Option {
-    name: string
-    grades: {
-        [key: string]: number
-    }
-    finalScore: number
-}
-
-interface OptionProperties {
-    [key: string]: number
-}
+import { Option, Property } from "../interfaces"
 
 function orderByScore(options: Array<Option>) {
     options.sort((a, b) => {
@@ -17,13 +7,13 @@ function orderByScore(options: Array<Option>) {
     return options
 }
 
-function calculateScore(options: Array<Option>, optionProperties: OptionProperties) {
+function calculateScore(options: Array<Option>, properties: Array<Property>) {
     let newOptions = []
     for (let i = 0; i < options.length; i++) {
         let option = options[i]
         let finalScore = 0
-        for (let key in option.grades) {
-            finalScore += option.grades[key] * optionProperties[key]
+        for (let key in option.scores) {
+            finalScore += option.scores[key] * properties[key]
         }
         option.finalScore = finalScore
         newOptions.push(option)

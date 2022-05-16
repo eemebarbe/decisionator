@@ -3,28 +3,14 @@ import styled from "styled-components"
 import { Form, H1, Slider, Card, H2, P } from "../components"
 import { metrics } from "../themes"
 import { UserContext } from "../contexts/userContext"
-
-interface Option {
-    id: number
-    name: string
-    scores?: {
-        [key: number]: number
-    }
-    finalScore?: number
-}
-
-interface Property {
-    id: number
-    weight: number
-    name: string
-}
+import { Property, Option } from "../interfaces"
 
 function Grades() {
     const { userState, userDispatch } = useContext(UserContext)
 
     useEffect(() => {
         let scoreConstructor = {}
-        userState.properties.forEach((x) => (scoreConstructor[x.id] = 0))
+        userState.properties.forEach((x: Property) => (scoreConstructor[x.id] = 0))
         userState.options.map((option: Option) =>
             userDispatch({
                 type: "UPDATE_OPTION",

@@ -2,15 +2,7 @@ import React, { useEffect, useContext } from "react"
 import styled from "styled-components"
 import { Form, H1, P, Input, Button, Card } from "../components"
 import { UserContext } from "../contexts/userContext"
-
-interface Option {
-    id: number
-    name: string
-    scores?: {
-        [key: number]: number
-    }
-    finalScore?: number
-}
+import { Option } from "../interfaces"
 
 function Options() {
     const { userState, userDispatch } = useContext(UserContext)
@@ -40,6 +32,7 @@ function Options() {
                                 placeholder="Name of option"
                             />
                             <Button
+                                marginLeft
                                 disabled={userState.options.length <= 1}
                                 small
                                 onClick={(e: React.SyntheticEvent) =>
@@ -62,15 +55,13 @@ function Options() {
 
     return (
         <>
-            <H1>Create Options</H1>
-            <P>List every option that you're choosing between.</P>
-            <Button
-                marginBottom
-                disabled={!userState.options.length}
-                onClick={(e: React.SyntheticEvent) => addEntry(e)}
-            >
-                Add option
-            </Button>
+            <Alignment>
+                <H1>Create Options</H1>
+                <Button disabled={!userState.options.length} onClick={(e: React.SyntheticEvent) => addEntry(e)}>
+                    Add option
+                </Button>
+            </Alignment>
+            <P>List at least two options that you're choosing between.</P>
             {entries()}
         </>
     )

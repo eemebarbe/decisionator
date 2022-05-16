@@ -31,7 +31,7 @@ function App() {
     const disableNextButton = () => {
         if (page === 0 && userState.properties[0] && userState.properties[0].name) {
             return false
-        } else if (page === 1 && userState.options.length) {
+        } else if (page === 1 && userState.options.length > 1) {
             return false
         } else if (page === 2) {
             return false

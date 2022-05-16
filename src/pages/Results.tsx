@@ -2,15 +2,7 @@ import React, { useEffect, useContext } from "react"
 import styled from "styled-components"
 import { Form, H1, H2, P, Input, Button, Card } from "../components"
 import { UserContext } from "../contexts/userContext"
-
-interface Option {
-    id: number
-    name: string
-    scores?: {
-        [key: number]: number
-    }
-    finalScore?: number
-}
+import { Option, Property } from "../interfaces"
 
 function Results() {
     const { userState, userDispatch } = useContext(UserContext)
@@ -20,7 +12,7 @@ function Results() {
             let finalScore = 0
             Object.entries(option.scores).forEach((grade) => {
                 const [key, value] = grade
-                const matchingProperty = userState.properties.find((x) => x.id === parseInt(key))
+                const matchingProperty = userState.properties.find((x: Property) => x.id === parseInt(key))
                 finalScore = finalScore + value * matchingProperty.weight
             })
             userDispatch({

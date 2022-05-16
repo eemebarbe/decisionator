@@ -2,12 +2,7 @@ import React, { useState, useEffect, useContext } from "react"
 import styled from "styled-components"
 import { Form, H1, H2, Input, Slider, Button, Card, P } from "../components"
 import { UserContext } from "../contexts/userContext"
-
-interface Property {
-    id: number
-    weight: number
-    name: string
-}
+import { Property } from "../interfaces"
 
 function CreateProperties() {
     const { userState, userDispatch } = useContext(UserContext)
