@@ -12,7 +12,7 @@ function Options() {
     }, [])
 
     const createNewOption = () => {
-        userDispatch({ type: "ADD_OPTION", payload: { id: Date.now() } })
+        userDispatch({ type: "ADD_OPTION", payload: { id: Date.now(), name: "" } })
     }
 
     const entries = () => {

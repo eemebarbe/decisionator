@@ -1,8 +1,8 @@
 import { Option, Property } from "../interfaces"
 
 function orderByScore(options: Array<Option>) {
-    options.sort((a, b) => {
-        return b.finalScore - a.finalScore
+    options.sort((a: Option, b: Option) => {
+        return b.finalScore! - a.finalScore!
     })
     return options
 }
@@ -13,7 +13,8 @@ function calculateScore(options: Array<Option>, properties: Array<Property>) {
         let option = options[i]
         let finalScore = 0
         for (let key in option.scores) {
-            finalScore += option.scores[key] * properties[key]
+            let matchingProperty = properties.find((x) => x.id === parseInt(key))
+            finalScore += option.scores[parseInt(key)] * matchingProperty!.weight
         }
         option.finalScore = finalScore
         newOptions.push(option)

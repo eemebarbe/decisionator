@@ -1,5 +1,26 @@
 import React, { useReducer, createContext } from "react"
+import { Option, Property } from "../interfaces"
 const styleMode = window.localStorage.getItem("styleMode")
+
+interface UserState {
+    properties: Array<Property>
+    options: Array<Option>
+    styleMode: string
+}
+
+type Actions =
+    | { type: "ADD_PROPERTY"; payload: Property }
+    | { type: "UPDATE_PROPERTY"; payload: Property }
+    | { type: "DELETE_PROPERTY"; payload: Property }
+    | { type: "ADD_OPTION"; payload: Option }
+    | { type: "UPDATE_OPTION"; payload: Option }
+    | { type: "DELETE_OPTION"; payload: Option }
+    | { type: "styleMode"; payload: string }
+
+type ContextApi = {
+    userState: typeof initialState
+    userDispatch: React.Dispatch<Actions>
+}
 
 const initialState = {
     properties: [],
@@ -7,9 +28,9 @@ const initialState = {
     styleMode: styleMode ? styleMode : "main",
 }
 
-export const UserContext = createContext(initialState)
+export const UserContext = createContext<ContextApi>({ userState: initialState, userDispatch: () => {} })
 
-const reducer = (state, action) => {
+const reducer = (state: UserState, action: Actions) => {
     switch (action.type) {
         case "ADD_PROPERTY":
             return { ...state, properties: [...state.properties, action.payload] }
@@ -22,7 +43,7 @@ const reducer = (state, action) => {
                 properties: [...newProps],
             }
         case "DELETE_PROPERTY":
-            return { ...state, properties: [...state.properties.filter((x) => x.id !== action.payload)] }
+            return { ...state, properties: [...state.properties.filter((x) => x.id !== action.payload.id)] }
         case "ADD_OPTION":
             return { ...state, options: [...state.options, action.payload] }
         case "UPDATE_OPTION":
@@ -39,7 +60,7 @@ const reducer = (state, action) => {
     }
 }
 
-export const UserProvider = (props) => {
+export const UserProvider = (props: React.PropsWithChildren<{}>) => {
     const [userState, userDispatch] = useReducer(reducer, initialState)
     return <UserContext.Provider value={{ userState, userDispatch }}>{props.children}</UserContext.Provider>
 }

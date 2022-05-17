@@ -12,7 +12,7 @@ function CreateProperties() {
     }, [])
 
     const createNewProperty = () => {
-        userDispatch({ type: "ADD_PROPERTY", payload: { id: Date.now(), weight: 0 } })
+        userDispatch({ type: "ADD_PROPERTY", payload: { id: Date.now(), weight: 0, name: "" } })
     }
 
     const propertyForm = (property: Property) => {
@@ -67,7 +67,7 @@ function CreateProperties() {
 
     const deleteProperty = (e: React.SyntheticEvent, property: Property) => {
         e.preventDefault()
-        userDispatch({ type: "DELETE_PROPERTY", payload: property.id })
+        userDispatch({ type: "DELETE_PROPERTY", payload: property })
     }
 
     return (

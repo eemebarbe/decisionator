@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useContext, useEffect } from "react"
 import styled from "styled-components"
 import { Form, H1, Slider, Card, H2, P } from "../components"
 import { metrics } from "../themes"
@@ -9,14 +9,16 @@ function Grades() {
     const { userState, userDispatch } = useContext(UserContext)
 
     useEffect(() => {
-        let scoreConstructor = {}
-        userState.properties.forEach((x: Property) => (scoreConstructor[x.id] = 0))
-        userState.options.map((option: Option) =>
-            userDispatch({
-                type: "UPDATE_OPTION",
-                payload: { ...option, scores: scoreConstructor },
-            })
-        )
+        if (!userState.options.length) {
+            let scoreConstructor = {} as Option["scores"]
+            userState.properties.forEach((x: Property) => (scoreConstructor![x.id] = 0))
+            userState.options.map((option: Option) =>
+                userDispatch({
+                    type: "UPDATE_OPTION",
+                    payload: { ...option, scores: scoreConstructor },
+                })
+            )
+        }
     }, [])
 
     const optionGrader = () => {

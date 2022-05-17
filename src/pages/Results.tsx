@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react"
 import styled from "styled-components"
-import { Form, H1, H2, P, Input, Button, Card } from "../components"
+import { H1, H2, P, Card } from "../components"
 import { UserContext } from "../contexts/userContext"
 import { Option, Property } from "../interfaces"
 
@@ -10,10 +10,10 @@ function Results() {
     useEffect(() => {
         userState.options.forEach((option: Option) => {
             let finalScore = 0
-            Object.entries(option.scores).forEach((grade) => {
+            Object.entries(option.scores as {}).forEach((grade) => {
                 const [key, value] = grade
                 const matchingProperty = userState.properties.find((x: Property) => x.id === parseInt(key))
-                finalScore = finalScore + value * matchingProperty.weight
+                finalScore = finalScore + value * matchingProperty!.weight
             })
             userDispatch({
                 type: "UPDATE_OPTION",
