@@ -28,7 +28,7 @@ function CreateProperties() {
                         <Input
                             value={property.name}
                             marginBottom
-                            placeholder="Name of property"
+                            placeholder="Name of priority"
                             onChange={(e: React.FormEvent<HTMLInputElement>) =>
                                 userDispatch({
                                     type: "UPDATE_PROPERTY",
