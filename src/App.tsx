@@ -8,9 +8,11 @@ import Properties from "./pages/Properties"
 import Options from "./pages/Options"
 import Grades from "./pages/Grades"
 import Results from "./pages/Results"
+import Welcome from "./pages/Welcome"
 
 function App() {
     const [page, setPage] = useState(0)
+    const [startQuestionnaire, setStartQuestionnaire] = useState(false)
     const styleMode = window.localStorage.getItem("styleMode")
     const { userState, userDispatch } = useContext(UserContext)
 
@@ -39,27 +41,43 @@ function App() {
         return true
     }
 
+    const questionnaireToggle = () => {
+        if (startQuestionnaire) {
+            return (
+                <>
+                    <ProgressBar current={page} length={pageList().length} />
+                    {pageList()[page]}
+                </>
+            )
+        } else {
+            return <Welcome start={() => setStartQuestionnaire(true)} />
+        }
+    }
+
+    const navigation = () => {
+        return (
+            <Alignment>
+                <Navigation>
+                    <div>
+                        <Button disabled={!page} onClick={() => setPage(page - 1)}>
+                            Previous Step
+                        </Button>
+                        <Button disabled={disableNextButton()} onClick={() => setPage(page + 1)}>
+                            Next Step
+                        </Button>
+                    </div>
+                </Navigation>
+            </Alignment>
+        )
+    }
+
     return (
         <ThemeProvider theme={styleMode && styleMode === "dark" ? colors.dark : colors.main}>
             <GlobalStyle />
             <AppWrapper>
                 <Header />
-                <BodyWrapper>
-                    <ProgressBar current={page} length={pageList().length} />
-                    {pageList()[page]}
-                </BodyWrapper>
-                <Alignment>
-                    <Navigation>
-                        <div>
-                            <Button disabled={!page} onClick={() => setPage(page - 1)}>
-                                Previous Step
-                            </Button>
-                            <Button disabled={disableNextButton()} onClick={() => setPage(page + 1)}>
-                                Next Step
-                            </Button>
-                        </div>
-                    </Navigation>
-                </Alignment>
+                <BodyWrapper>{questionnaireToggle()}</BodyWrapper>
+                {startQuestionnaire && navigation()}
             </AppWrapper>
         </ThemeProvider>
     )
