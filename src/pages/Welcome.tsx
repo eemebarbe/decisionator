@@ -11,7 +11,7 @@ function Welcome(props: WelcomeProps) {
             <H1>Decisionator</H1>
             <H2>Just a random project to get me familiar with Typescript, tbh.</H2>
             <Button marginBottom onClick={() => props.start()}>
-                Get Started
+                Make a decision
             </Button>
             <P>
                 It's difficult to quantify all of the factors that go into why you should do this thing instead of that

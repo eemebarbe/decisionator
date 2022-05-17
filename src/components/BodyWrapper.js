@@ -27,7 +27,7 @@ const BodyWrapper = styled.div`
 const BodyInner = styled.div`
     padding-bottom: ${metrics.headerHeight * 2}px;
     @media (max-width: 480px) {
-        padding-bottom: ${metrics.headerHeight}px;
+        padding-bottom: ${metrics.headerHeight * 1.5}px;
     }
 `
 

@@ -24,6 +24,7 @@ const Button = styled.button`
     justify-content: center;
     @media (max-width: 480px) {
         width: ${(props) => (props.square ? `${metrics.baseUnit * 6}px` : `100%`)};
+        font-size: ${(props) => (props.square ? `${metrics.regularText}px` : `${metrics.smallText}px`)};
     }
 `
 

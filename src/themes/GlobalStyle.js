@@ -59,7 +59,7 @@ export const inputStyles = css`
     padding: 0;
     padding-left: ${metrics.baseUnit * 2}px;
     height: ${metrics.baseUnit * 6}px;
-    width: ${metrics.baseUnit * 30}px;
+    width: 100%;
     font-size: ${metrics.regularText}px;
     &::placeholder {
         color: ${(props) => props.theme.inactive};
@@ -68,6 +68,11 @@ export const inputStyles = css`
         background-color: ${(props) => props.theme.inactive};
     }
     box-sizing: border-box;
-    width: 100%;
+    @media (max-width: 480px) {
+        display: flex;
+        width: auto;
+        flex-grow: 1;
+        font-size: ${(props) => (props.square ? `${metrics.regularText}px` : `${metrics.smallText}px`)};
+    }
 `
 export default GlobalStyle

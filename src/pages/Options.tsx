@@ -3,9 +3,11 @@ import styled from "styled-components"
 import { Form, H1, P, Input, Button, Card } from "../components"
 import { UserContext } from "../contexts/userContext"
 import { Option, Property } from "../interfaces"
+import useWindowSize from "../hook/windowSizeHook"
 
 function Options() {
     const { userState, userDispatch } = useContext(UserContext)
+    const window = useWindowSize()
 
     useEffect(() => {
         !userState.options.length && createNewOption()
@@ -42,7 +44,7 @@ function Options() {
                                     userDispatch({ type: "DELETE_OPTION", payload: option })
                                 }
                             >
-                                Delete
+                                {window.width! <= 480 ? "✗" : "Delete"}
                             </Button>
                         </Alignment>
                     </Form>

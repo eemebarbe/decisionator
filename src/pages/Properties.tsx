@@ -1,11 +1,14 @@
 import React, { useEffect, useContext } from "react"
 import styled from "styled-components"
-import { Form, H1, H2, Input, Slider, Button, Card, P } from "../components"
+import { Form, H1, Input, Slider, Button, Card, P } from "../components"
+import { metrics } from "../themes"
 import { UserContext } from "../contexts/userContext"
 import { Property } from "../interfaces"
+import useWindowSize from "../hook/windowSizeHook"
 
 function CreateProperties() {
     const { userState, userDispatch } = useContext(UserContext)
+    const window = useWindowSize()
 
     useEffect(() => {
         !userState.properties.length && createNewProperty()
@@ -41,12 +44,12 @@ function CreateProperties() {
                             small
                             onClick={(e: React.SyntheticEvent) => deleteProperty(e, property)}
                         >
-                            Delete
+                            {window.width! <= 480 ? "✗" : "Delete"}
                         </Button>
                     </Alignment>
                     <Alignment>
-                        <P>How important is this property to you, relative to other properties?</P>
-                        <H2>{property.weight}/10</H2>
+                        <P>How important is this property to you?</P>
+                        <Weight>{property.weight}</Weight>
                     </Alignment>
                     <Slider
                         value={property.weight}
@@ -96,8 +99,16 @@ const Alignment = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media (max-width: 480px) {
-    }
+`
+
+const Weight = styled.div`
+    width: ${metrics.baseUnit * 6}px;
+    margin-left: ${metrics.baseUnit * 3}px;
+    margin-bottom: ${metrics.baseUnit * 3}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: ${metrics.H2}px;
 `
 
 export default CreateProperties

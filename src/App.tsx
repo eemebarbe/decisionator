@@ -63,7 +63,7 @@ function App() {
             <Alignment>
                 <Navigation>
                     <div>
-                        <Button disabled={!page} onClick={() => navClick(false)}>
+                        <Button marginRight disabled={!page} onClick={() => navClick(false)}>
                             Previous Step
                         </Button>
                         <Button disabled={disableNextButton()} onClick={() => navClick(true)}>
@@ -118,6 +118,10 @@ const Navigation = styled.div`
         border-radius: ${metrics.globalBorderRadius}px;
         margin-bottom: ${metrics.baseUnit * 3}px;
         padding: ${metrics.baseUnit * 3}px;
+        @media (max-width: 480px) {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
     }
 `
 
