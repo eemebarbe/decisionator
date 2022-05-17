@@ -1,6 +1,6 @@
 const main = {
     inactive: "rgb(211, 211, 211)",
-    primaryButton: "rgb(187,134,255)",
+    primaryButton: "rgb(255,0,127)",
     mainText: "rgb(0, 0, 0)",
     detailText: "rgb(255, 255, 255)",
     secondaryColor: "rgb(207, 102, 121)",
@@ -14,7 +14,7 @@ const main = {
 
 const dark = {
     inactive: "rgb(80, 80, 80)",
-    primaryButton: "rgb(187,134,255)",
+    primaryButton: "rgb(255,0,127)",
     mainText: "rgb(255, 255, 255)",
     detailText: "rgb(255, 255, 255)",
     secondaryColor: "rgb(207, 102, 121)",

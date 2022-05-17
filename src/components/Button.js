@@ -23,7 +23,7 @@ const Button = styled.button`
     align-items: center;
     justify-content: center;
     @media (max-width: 480px) {
-        width: 100%;
+        width: ${(props) => (props.square ? `${metrics.baseUnit * 6}px` : `100%`)};
     }
 `
 

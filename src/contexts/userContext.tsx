@@ -17,11 +17,6 @@ type Actions =
     | { type: "DELETE_OPTION"; payload: Option }
     | { type: "styleMode"; payload: string }
 
-type ContextApi = {
-    state: typeof initialState
-    dispatch: React.Dispatch<Actions>
-}
-
 const initialState = {
     properties: [],
     options: [],

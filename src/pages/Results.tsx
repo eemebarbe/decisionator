@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { H1, H2, P, Card, GraphBar } from "../components"
 import { UserContext } from "../contexts/userContext"
 import { Option, Property } from "../interfaces"
-import { metrics } from "../themes"
 
 function Results() {
     const { userState, userDispatch } = useContext(UserContext)

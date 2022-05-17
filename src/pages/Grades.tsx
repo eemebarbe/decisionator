@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import { Form, H1, Slider, Card, H2, P } from "../components"
-import { metrics } from "../themes"
 import { UserContext } from "../contexts/userContext"
 import { Property, Option } from "../interfaces"
 

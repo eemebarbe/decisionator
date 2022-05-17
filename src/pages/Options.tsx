@@ -34,6 +34,7 @@ function Options() {
                                 placeholder="Name of option"
                             />
                             <Button
+                                square
                                 marginLeft
                                 disabled={userState.options.length <= 1}
                                 small
@@ -59,11 +60,15 @@ function Options() {
         <>
             <Alignment>
                 <H1>Create Options</H1>
-                <Button disabled={!userState.options.length} onClick={(e: React.SyntheticEvent) => addEntry(e)}>
-                    Add option
-                </Button>
             </Alignment>
             <P>List at least two options that you're choosing between.</P>
+            <Button
+                marginBottom
+                disabled={!userState.options.length}
+                onClick={(e: React.SyntheticEvent) => addEntry(e)}
+            >
+                Add option
+            </Button>
             {entries()}
         </>
     )

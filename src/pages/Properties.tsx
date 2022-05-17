@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useEffect, useContext } from "react"
 import styled from "styled-components"
 import { Form, H1, H2, Input, Slider, Button, Card, P } from "../components"
 import { UserContext } from "../contexts/userContext"
@@ -35,6 +35,7 @@ function CreateProperties() {
                         />
                         <Button
                             disabled={userState.properties.length <= 1}
+                            square
                             marginBottom
                             marginLeft
                             small
@@ -44,7 +45,7 @@ function CreateProperties() {
                         </Button>
                     </Alignment>
                     <Alignment>
-                        <H2>How important is this property to you, relative to other properties?</H2>
+                        <P>How important is this property to you, relative to other properties?</P>
                         <H2>{property.weight}/10</H2>
                     </Alignment>
                     <Slider
@@ -76,18 +77,16 @@ function CreateProperties() {
 
     return (
         <>
-            <Alignment>
-                <H1>Create Properties</H1>
-                <Button disabled={!userState.properties.length} onClick={createNewProperty}>
-                    Add property
-                </Button>
-            </Alignment>
+            <H1>Create Properties</H1>
             <P>
                 Properties are a way of quantifying the overall value of each of your options. When coming up with
                 properties, think about things that you want more of in your life, or things that you want to improve. A
                 few examples are "fulfillment", "career opportunities", or "romantic prospects". Try not to create too
                 many properties, and make sure to combine any properties that seem too similar into one property.
             </P>
+            <Button marginBottom disabled={!userState.properties.length} onClick={createNewProperty}>
+                Add property
+            </Button>
             {entries()}
         </>
     )
@@ -97,6 +96,8 @@ const Alignment = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 480px) {
+    }
 `
 
 export default CreateProperties

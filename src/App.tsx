@@ -14,7 +14,7 @@ function App() {
     const [page, setPage] = useState(0)
     const [startQuestionnaire, setStartQuestionnaire] = useState(false)
     const styleMode = window.localStorage.getItem("styleMode")
-    const { userState, userDispatch } = useContext(UserContext)
+    const { userState } = useContext(UserContext)
 
     useEffect(() => {
         if (!styleMode) {
@@ -54,15 +54,19 @@ function App() {
         }
     }
 
+    const navClick = (direction: boolean) => {
+        setPage(direction ? page + 1 : page - 1)
+    }
+
     const navigation = () => {
         return (
             <Alignment>
                 <Navigation>
                     <div>
-                        <Button disabled={!page} onClick={() => setPage(page - 1)}>
+                        <Button disabled={!page} onClick={() => navClick(false)}>
                             Previous Step
                         </Button>
-                        <Button disabled={disableNextButton()} onClick={() => setPage(page + 1)}>
+                        <Button disabled={disableNextButton()} onClick={() => navClick(true)}>
                             Next Step
                         </Button>
                     </div>
