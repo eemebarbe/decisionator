@@ -50,7 +50,7 @@ function Grades() {
     return (
         <>
             <H1>Grade Your Options</H1>
-            <P>Determine how well each one of your options optimizes for each of your chosen parameters.</P>
+            <P>Determine how well each one of your options optimizes for each of your priorities.</P>
             <Form>{optionGrader()}</Form>
         </>
     )

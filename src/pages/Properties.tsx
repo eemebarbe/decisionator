@@ -48,7 +48,7 @@ function CreateProperties() {
                         </Button>
                     </Alignment>
                     <Alignment>
-                        <P>How important is this property to you?</P>
+                        <P>How important is this priority to you?</P>
                         <Weight>{property.weight}</Weight>
                     </Alignment>
                     <Slider
@@ -80,15 +80,15 @@ function CreateProperties() {
 
     return (
         <>
-            <H1>Create Properties</H1>
+            <H1>Create Priorities</H1>
             <P>
-                Properties are a way of quantifying the overall value of each of your options. When coming up with
-                properties, think about things that you want more of in your life, or things that you want to improve. A
+                Priorities are a way of quantifying the overall value of each of your options. When coming up with
+                priority, think about things that you want more of in your life, or things that you want to improve. A
                 few examples are "fulfillment", "career opportunities", or "romantic prospects". Try not to create too
-                many properties, and make sure to combine any properties that seem too similar into one property.
+                many priorities, and make sure to combine any priorities that seem too similar into one property.
             </P>
             <Button marginBottom disabled={!userState.properties.length} onClick={createNewProperty}>
-                Add property
+                Add priority
             </Button>
             {entries()}
         </>
