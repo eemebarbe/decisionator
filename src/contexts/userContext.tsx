@@ -28,7 +28,10 @@ const initialState = {
     styleMode: styleMode ? styleMode : "main",
 }
 
-export const UserContext = createContext<UserState | null>(initialState)
+export const UserContext = createContext<{ userState: UserState; userDispatch: React.Dispatch<Actions> }>({
+    userState: initialState,
+    userDispatch: () => {},
+})
 
 const reducer = (state: UserState, action: Actions) => {
     switch (action.type) {

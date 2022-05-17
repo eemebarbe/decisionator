@@ -20,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
     input, textarea, button {
       font-family: inherit;
     }
-    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     margin: 0;
     padding: 0;
     -webkit-font-smooth: antialiased;
@@ -52,7 +52,10 @@ export const inputStyles = css`
     border-radius: ${metrics.globalBorderRadius}px;
     outline: none;
     margin: none;
-    margin-bottom: ${metrics.baseUnit * 3}px;
+    margin-left: ${(props) => (props.marginLeft ? `${metrics.baseUnit * 3}px` : 0)};
+    margin-right: ${(props) => (props.marginRight ? `${metrics.baseUnit * 3}px` : 0)};
+    margin-bottom: ${(props) => (props.marginBottom ? `${metrics.baseUnit * 3}px` : 0)};
+    margin-top: ${(props) => (props.marginTop ? `${metrics.baseUnit * 3}px` : 0)};
     padding: 0;
     padding-left: ${metrics.baseUnit * 2}px;
     height: ${metrics.baseUnit * 6}px;

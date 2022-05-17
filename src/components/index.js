@@ -5,7 +5,6 @@ import H2 from "./H2"
 import P from "./P"
 import CenteredDiv from "./CenteredDiv"
 import Form from "./Form"
-import Select from "./Select"
 import BodyWrapper from "./BodyWrapper"
 import Spinner from "./Spinner"
 import Slider from "./Slider"
@@ -13,6 +12,7 @@ import Switch from "./Switch"
 import Radio from "./Radio"
 import MultiSelect from "./MultiSelect"
 import ProgressBar from "./ProgressBar"
+import GraphBar from "./GraphBar"
 import Checkbox from "./Checkbox"
 import TextArea from "./TextArea"
 import Badge from "./Badge"
@@ -34,10 +34,10 @@ export {
     Radio,
     MultiSelect,
     ProgressBar,
+    GraphBar,
     Checkbox,
     Header,
     TextArea,
     Badge,
-    Select,
     Card,
 }

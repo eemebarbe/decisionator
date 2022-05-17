@@ -1,8 +1,12 @@
 import styled from "styled-components"
 import { inputStyles } from "../themes/GlobalStyle"
 
-const Input = styled.input`
+const StyledInput = styled.input`
     ${inputStyles}
 `
+
+const Input = (props) => {
+    return <StyledInput {...props} />
+}
 
 export default Input

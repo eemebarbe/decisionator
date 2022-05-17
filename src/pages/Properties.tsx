@@ -12,21 +12,24 @@ function CreateProperties() {
     }, [])
 
     const createNewProperty = () => {
-        userDispatch({ type: "ADD_PROPERTY", payload: { id: Date.now(), weight: 0, name: "" } })
+        const id = Date.now()
+        userDispatch({ type: "ADD_PROPERTY", payload: { id: id, weight: 0, name: "" } })
+        userState.options.forEach((x) => (x.scores![id] = 0))
     }
 
     const propertyForm = (property: Property) => {
         return (
-            <Card>
+            <Card key={property.id}>
                 <Form>
                     <Alignment>
                         <Input
                             value={property.name}
+                            marginBottom
                             placeholder="Name of property"
-                            onChange={(e) =>
+                            onChange={(e: React.FormEvent<HTMLInputElement>) =>
                                 userDispatch({
                                     type: "UPDATE_PROPERTY",
-                                    payload: { ...property, name: e.target.value },
+                                    payload: { ...property, name: (e.target as HTMLInputElement).value },
                                 })
                             }
                         />
@@ -68,6 +71,7 @@ function CreateProperties() {
     const deleteProperty = (e: React.SyntheticEvent, property: Property) => {
         e.preventDefault()
         userDispatch({ type: "DELETE_PROPERTY", payload: property })
+        userState.options.forEach((x) => delete x.scores![property.id])
     }
 
     return (

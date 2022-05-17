@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react"
 import styled from "styled-components"
 import { Form, H1, P, Input, Button, Card } from "../components"
 import { UserContext } from "../contexts/userContext"
-import { Option } from "../interfaces"
+import { Option, Property } from "../interfaces"
 
 function Options() {
     const { userState, userDispatch } = useContext(UserContext)
@@ -12,21 +12,23 @@ function Options() {
     }, [])
 
     const createNewOption = () => {
-        userDispatch({ type: "ADD_OPTION", payload: { id: Date.now(), name: "" } })
+        let scoreConstructor = {} as Option["scores"]
+        userState.properties.forEach((x: Property) => (scoreConstructor![x.id] = 0))
+        userDispatch({ type: "ADD_OPTION", payload: { id: Date.now(), name: "", scores: scoreConstructor } })
     }
 
     const entries = () => {
         return userState.options.map((option: Option) => {
             return (
-                <Card>
+                <Card key={option.id}>
                     <Form>
                         <Alignment>
                             <Input
                                 value={option.name}
-                                onChange={(e) =>
+                                onChange={(e: React.FormEvent<HTMLInputElement>) =>
                                     userDispatch({
                                         type: "UPDATE_OPTION",
-                                        payload: { ...option, name: e.target.value },
+                                        payload: { ...option, name: (e.target as HTMLInputElement).value },
                                     })
                                 }
                                 placeholder="Name of option"

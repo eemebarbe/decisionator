@@ -8,23 +8,10 @@ import { Property, Option } from "../interfaces"
 function Grades() {
     const { userState, userDispatch } = useContext(UserContext)
 
-    useEffect(() => {
-        if (!userState.options.length) {
-            let scoreConstructor = {} as Option["scores"]
-            userState.properties.forEach((x: Property) => (scoreConstructor![x.id] = 0))
-            userState.options.map((option: Option) =>
-                userDispatch({
-                    type: "UPDATE_OPTION",
-                    payload: { ...option, scores: scoreConstructor },
-                })
-            )
-        }
-    }, [])
-
     const optionGrader = () => {
         return userState.options.map((option: Option) => {
             return (
-                <Card>
+                <Card key={option.id}>
                     <H2>{option.name}</H2>
                     {renderSliders(option)}
                 </Card>
@@ -33,26 +20,30 @@ function Grades() {
     }
 
     const renderSliders = (option: Option) => {
-        return userState.properties.map((property: Property) => {
+        return userState.properties.map((property: Property, i) => {
             const optionScore = option.scores ? option.scores[property.id] : 0
+            const last = userState.properties.length - 1 === i
             return (
-                <SliderContainer>
+                <div key={property.id}>
                     <Alignment>
                         <P>{property.name}</P>
                         <P>{optionScore}/10</P>
                     </Alignment>
                     <Slider
-                        marginBottom
+                        marginBottom={!last}
                         value={optionScore}
                         range={[0, 10]}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
                             userDispatch({
                                 type: "UPDATE_OPTION",
-                                payload: { ...option, scores: { ...option.scores, [property.id]: e.target.value } },
+                                payload: {
+                                    ...option,
+                                    scores: { ...option.scores, [property.id]: e.target.valueAsNumber },
+                                },
                             })
                         }
                     />
-                </SliderContainer>
+                </div>
             )
         })
     }
@@ -70,10 +61,6 @@ const Alignment = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-`
-
-const SliderContainer = styled.div`
-    margin-bottom: ${metrics.baseUnit * 3}px;
 `
 
 export default Grades
