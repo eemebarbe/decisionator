@@ -18,8 +18,8 @@ type Actions =
     | { type: "styleMode"; payload: string }
 
 type ContextApi = {
-    userState: typeof initialState
-    userDispatch: React.Dispatch<Actions>
+    state: typeof initialState
+    dispatch: React.Dispatch<Actions>
 }
 
 const initialState = {
@@ -28,7 +28,7 @@ const initialState = {
     styleMode: styleMode ? styleMode : "main",
 }
 
-export const UserContext = createContext<ContextApi>({ userState: initialState, userDispatch: () => {} })
+export const UserContext = createContext<UserState | null>(initialState)
 
 const reducer = (state: UserState, action: Actions) => {
     switch (action.type) {
