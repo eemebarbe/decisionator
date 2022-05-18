@@ -82,15 +82,15 @@ function CreateProperties() {
         <>
             <H1>Create Priorities</H1>
             <P>
-                Priorities are a way of quantifying the overall value of each of your options. When coming up with a
-                priority, think about things that you want more of in your life or things that you want to improve, such
-                as "fulfillment", "career opportunities", or "romantic prospects". Try not to create too many
-                priorities, and make sure to combine any priorities that seem too similar into one property.
+                Priorities are a way of quantifying the overall value of each of your options. Priorities differ based
+                on the type of decision you're trying to make. Think about what you want this decision to achieve, what
+                you want more of or what you want to improve. Try not to create too many priorities, and make sure to
+                combine any priorities that seem too similar.
             </P>
+            {entries()}
             <Button marginBottom disabled={!userState.properties.length} onClick={createNewProperty}>
                 Add priority
             </Button>
-            {entries()}
         </>
     )
 }

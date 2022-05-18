@@ -9,10 +9,10 @@ function Welcome(props: WelcomeProps) {
     return (
         <>
             <H1>Decisionator</H1>
-            <H2>Just a random project to get me familiar with Typescript, tbh.</H2>
             <Button marginBottom onClick={() => props.start()}>
                 Make a decision
             </Button>
+            <H2>Just a random project to help me become more familiar with Typescript, tbh.</H2>
             <P>
                 It's difficult to quantify all of the factors that go into why you should do this thing instead of that
                 thing. And when you really think about it, it's pretty concerning how informal our decision making tends

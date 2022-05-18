@@ -60,10 +60,9 @@ function Options() {
 
     return (
         <>
-            <Alignment>
-                <H1>Create Options</H1>
-            </Alignment>
+            <H1>Create Options</H1>
             <P>List at least two options that you're choosing between.</P>
+            {entries()}
             <Button
                 marginBottom
                 disabled={!userState.options.length}
@@ -71,7 +70,6 @@ function Options() {
             >
                 Add option
             </Button>
-            {entries()}
         </>
     )
 }
