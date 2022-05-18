@@ -48,7 +48,7 @@ function CreateProperties() {
                         </Button>
                     </Alignment>
                     <Alignment>
-                        <P>How important is this priority to you?</P>
+                        <P>How high of a priority is this?</P>
                         <Weight>{property.weight}</Weight>
                     </Alignment>
                     <Slider
@@ -82,15 +82,15 @@ function CreateProperties() {
         <>
             <H1>Create Priorities</H1>
             <P>
-                Priorities are a way of quantifying the overall value of each of your options. Priorities differ based
-                on the type of decision you're trying to make. Think about what you want this decision to achieve, what
-                you want more of or what you want to improve. Try not to create too many priorities, and make sure to
-                combine any priorities that seem too similar.
+                Priorities are a way of quantifying the overall value of each of your options, and differ based on the
+                type of decision that you're making. What do you want this decision to achieve? What do you want more
+                of, or what do you want to improve? Try not to create too many priorities, and combine any priorities
+                that seem too similar.
             </P>
-            {entries()}
             <Button marginBottom disabled={!userState.properties.length} onClick={createNewProperty}>
                 Add priority
             </Button>
+            {entries()}
         </>
     )
 }

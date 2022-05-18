@@ -12,6 +12,7 @@ import Welcome from "./pages/Welcome"
 
 function App() {
     const [page, setPage] = useState(0)
+    const [triggerScroll, setTriggerScroll] = useState(false)
     const [startQuestionnaire, setStartQuestionnaire] = useState(false)
     const styleMode = window.localStorage.getItem("styleMode")
     const { userState } = useContext(UserContext)
@@ -56,6 +57,7 @@ function App() {
 
     const navClick = (direction: boolean) => {
         setPage(direction ? page + 1 : page - 1)
+        setTriggerScroll(true)
     }
 
     const navigation = () => {
@@ -79,7 +81,9 @@ function App() {
         <ThemeProvider theme={styleMode && styleMode === "dark" ? colors.dark : colors.main}>
             <GlobalStyle />
             <Header />
-            <BodyWrapper>{questionnaireToggle()}</BodyWrapper>
+            <BodyWrapper scroll={triggerScroll} resetTrigger={() => setTriggerScroll(false)}>
+                {questionnaireToggle()}
+            </BodyWrapper>
             {startQuestionnaire && navigation()}
         </ThemeProvider>
     )

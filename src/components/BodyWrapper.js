@@ -33,6 +33,7 @@ const BodyInner = styled.div`
 
 const Wrapper = (props) => {
     const [scrollbarWidth, setScrollbarWidth] = useState(0)
+    const scrollRef = useRef()
 
     useEffect(() => {
         const scrollDiv = document.createElement("div")
@@ -43,8 +44,16 @@ const Wrapper = (props) => {
         setScrollbarWidth(calculatedWidth)
     }, [])
 
+    useEffect(() => {
+        if (props.scroll && scrollRef.current) {
+            console.log("DGDFGSDF")
+            scrollRef.current.scrollTop = 0
+            props.resetTrigger()
+        }
+    }, [props.scroll])
+
     return (
-        <BodyOuter>
+        <BodyOuter ref={scrollRef}>
             <BodyWrapper scrollbarWidth={scrollbarWidth}>
                 <BodyInner>{props.children}</BodyInner>
             </BodyWrapper>
