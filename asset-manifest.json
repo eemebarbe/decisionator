@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/decisionator/static/css/main.e6c13ad2.css",
-    "main.js": "/decisionator/static/js/main.8b805b15.js",
+    "main.js": "/decisionator/static/js/main.fdb1b815.js",
     "static/js/787.472413a8.chunk.js": "/decisionator/static/js/787.472413a8.chunk.js",
     "index.html": "/decisionator/index.html",
     "static/media/flogo-HexRBG-Wht-72.svg": "/decisionator/static/media/flogo-HexRBG-Wht-72.2f1fa366abb6c05282419dfb8cbf4e98.svg",
     "static/media/shopping-cart.svg": "/decisionator/static/media/shopping-cart.5785b5c0fe540b5f16f77ea01052c815.svg",
     "static/media/send.svg": "/decisionator/static/media/send.15a8d3ae47058f44ed5e0baf8733daad.svg",
     "main.e6c13ad2.css.map": "/decisionator/static/css/main.e6c13ad2.css.map",
-    "main.8b805b15.js.map": "/decisionator/static/js/main.8b805b15.js.map",
+    "main.fdb1b815.js.map": "/decisionator/static/js/main.fdb1b815.js.map",
     "787.472413a8.chunk.js.map": "/decisionator/static/js/787.472413a8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.8b805b15.js"
+    "static/js/main.fdb1b815.js"
   ]
 }
