@@ -15,7 +15,8 @@ const HeaderWithRouter = (props) => {
 const Header = styled.div`
     transform: translateY(${(props) => "-" + props.scrollTop}px);
     z-index: 8;
-    position: absolute;
+    position: fixed;
+    top: 0;
     background-color: ${(props) => props.theme.secondLayerBackground};
     width: 100%;
     height: ${metrics.headerHeight}px;
@@ -24,7 +25,7 @@ const Header = styled.div`
     align-items: center;
     box-shadow: ${(props) => `0 1px ${metrics.baseUnit / 2}px 0 ${props.theme.shadow}`};
     @media (max-width: 480px) {
-        display: none;
+        height: ${metrics.baseUnit * 6}px;
     }
 `
 

@@ -20,7 +20,7 @@ const BodyWrapper = styled.div`
     width: ${metrics.bodyWidth}px;
     @media (max-width: 480px) {
         width: 100%;
-        padding-top: 0px;
+        padding-top: ${metrics.baseUnit * 6}px;
     }
 `
 
@@ -32,13 +32,9 @@ const BodyInner = styled.div`
 `
 
 const Wrapper = (props) => {
-    const scrollRef = useRef()
     const [scrollbarWidth, setScrollbarWidth] = useState(0)
 
     useEffect(() => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollTop = 0
-        }
         const scrollDiv = document.createElement("div")
         scrollDiv.setAttribute("style", "width:100px;height:100px;overflow:scroll;position:absolute;top:-9999px;")
         document.getElementsByTagName("body")[0].appendChild(scrollDiv)
@@ -48,7 +44,7 @@ const Wrapper = (props) => {
     }, [])
 
     return (
-        <BodyOuter ref={scrollRef}>
+        <BodyOuter>
             <BodyWrapper scrollbarWidth={scrollbarWidth}>
                 <BodyInner>{props.children}</BodyInner>
             </BodyWrapper>

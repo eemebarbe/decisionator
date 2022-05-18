@@ -92,7 +92,7 @@ const Alignment = styled.div`
 `
 
 const Navigation = styled.div`
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     display: flex;
