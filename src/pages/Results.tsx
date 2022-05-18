@@ -67,7 +67,7 @@ function Results() {
     return (
         <>
             <H1>Results</H1>
-            <P>Here are your options, ordered by score.</P>
+            <P>Your options, ordered from best to worst.</P>
             {entries()}
         </>
     )

@@ -78,21 +78,12 @@ function App() {
     return (
         <ThemeProvider theme={styleMode && styleMode === "dark" ? colors.dark : colors.main}>
             <GlobalStyle />
-            <AppWrapper>
-                <Header />
-                <BodyWrapper>{questionnaireToggle()}</BodyWrapper>
-                {startQuestionnaire && navigation()}
-            </AppWrapper>
+            <Header />
+            <BodyWrapper>{questionnaireToggle()}</BodyWrapper>
+            {startQuestionnaire && navigation()}
         </ThemeProvider>
     )
 }
-
-const AppWrapper = styled.div`
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    position: absolute;
-`
 
 const Alignment = styled.div`
     display: flex;

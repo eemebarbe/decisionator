@@ -6,9 +6,6 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   html {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
     font-size: ${metrics.baseUnit}px;
     background-color: ${(props) => props.theme.background};
     color: ${(props) => props.theme.mainText};
@@ -25,9 +22,6 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     -webkit-font-smooth: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
     list-style-position: inside;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     input:-webkit-autofill, 
