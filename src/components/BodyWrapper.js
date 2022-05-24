@@ -46,7 +46,6 @@ const Wrapper = (props) => {
 
     useEffect(() => {
         if (props.scroll && scrollRef.current) {
-            console.log("DGDFGSDF")
             scrollRef.current.scrollTop = 0
             props.resetTrigger()
         }

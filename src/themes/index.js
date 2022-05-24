@@ -1,5 +1,8 @@
-import colors from "./colors";
-import metrics from "./metrics";
-import icons from "./icons";
+import colors from "./colors"
+import metrics from "./metrics"
 
-export { colors, metrics, icons };
+export default (colorScheme) => {
+    return { ...colors[colorScheme], metrics }
+}
+
+export { colors, metrics }

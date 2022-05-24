@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { Form, H1, P, Input, Button, Card } from "../components"
 import { UserContext } from "../contexts/userContext"
 import { Option, Property } from "../interfaces"
-import useWindowSize from "../hook/windowSizeHook"
+import useWindowSize from "../hooks/windowSizeHook"
 
 function Options() {
     const { userState, userDispatch } = useContext(UserContext)

@@ -53,13 +53,13 @@ function Results() {
             const weightedScore = Math.round(value * property!.weight * 100) / 100
             const last = Object.entries<number>(option.scores as {}).length - 1 === i
             return (
-                <>
+                <React.Fragment key={i}>
                     <Alignment>
                         <P>{property!.name}</P>
                         <P>{Math.round(weightedScore * 100) / 100}</P>
                     </Alignment>
                     <GraphBar marginBottom={!last} current={weightedScore} length={100} />
-                </>
+                </React.Fragment>
             )
         })
     }

@@ -4,7 +4,7 @@ import { Form, H1, Input, Slider, Button, Card, P } from "../components"
 import { metrics } from "../themes"
 import { UserContext } from "../contexts/userContext"
 import { Property } from "../interfaces"
-import useWindowSize from "../hook/windowSizeHook"
+import useWindowSize from "../hooks/windowSizeHook"
 
 function CreateProperties() {
     const { userState, userDispatch } = useContext(UserContext)

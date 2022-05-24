@@ -1,16 +1,16 @@
-import { metrics } from "../themes"
 import { createGlobalStyle, css } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
+  ${({ theme }) => `
   *, *:before, *:after { 
     box-sizing: border-box;
   }
   html {
-    font-size: ${metrics.baseUnit}px;
-    background-color: ${(props) => props.theme.background};
-    color: ${(props) => props.theme.mainText};
+    font-size: ${theme.metrics.baseUnit}px;
+    background-color: ${theme.background};
+    color: ${theme.mainText};
     @media (max-width: 480px){ 
-      font-size: ${metrics.baseUnit}px;
+      font-size: ${theme.metrics.baseUnit}px;
     }
   }
   body {
@@ -28,45 +28,48 @@ export const GlobalStyle = createGlobalStyle`
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,
     input:-webkit-autofill:active {
-      -webkit-box-shadow: 0 0 0px 1000px ${(props) => props.theme.background} inset;
-      box-shadow: 0 0 0px 1000px ${(props) => props.theme.background} inset;
-      -webkit-text-fill-color: ${(props) => props.theme.mainText} !important;
-      background-color: ${(props) => props.theme.background} !important;
+      -webkit-box-shadow: 0 0 0px 1000px ${theme.background} inset;
+      box-shadow: 0 0 0px 1000px ${theme.background} inset;
+      -webkit-text-fill-color: ${theme.mainText} !important;
+      background-color: ${theme.background} !important;
     }
   }
   #root {
       height: 100%;
-  }`
+  }
+  `}`
 
 export const inputStyles = css`
-    background-color: ${(props) => props.theme.overlayBackground};
-    color: ${(props) => props.theme.mainText};
+    ${({ theme }) => `
+    background-color: ${theme.overlayBackground};
+    color: ${theme.mainText};
     border: none;
     border-radius: 0;
-    border-radius: ${metrics.globalBorderRadius}px;
+    border-radius: ${theme.metrics.globalBorderRadius}px;
     outline: none;
     margin: none;
-    margin-left: ${(props) => (props.marginLeft ? `${metrics.baseUnit * 3}px` : 0)};
-    margin-right: ${(props) => (props.marginRight ? `${metrics.baseUnit * 3}px` : 0)};
-    margin-bottom: ${(props) => (props.marginBottom ? `${metrics.baseUnit * 3}px` : 0)};
-    margin-top: ${(props) => (props.marginTop ? `${metrics.baseUnit * 3}px` : 0)};
+    margin-left: ${(props) => (props.marginLeft ? `${theme.metrics.baseUnit * 3}px` : 0)};
+    margin-right: ${(props) => (props.marginRight ? `${theme.metrics.baseUnit * 3}px` : 0)};
+    margin-bottom: ${(props) => (props.marginBottom ? `${theme.metrics.baseUnit * 3}px` : 0)};
+    margin-top: ${(props) => (props.marginTop ? `${theme.metrics.baseUnit * 3}px` : 0)};
     padding: 0;
-    padding-left: ${metrics.baseUnit * 2}px;
-    height: ${metrics.baseUnit * 6}px;
+    padding-left: ${theme.metrics.baseUnit * 2}px;
+    height: ${theme.metrics.baseUnit * 6}px;
     width: 100%;
-    font-size: ${metrics.regularText}px;
+    font-size: ${theme.metrics.regularText}px;
     &::placeholder {
-        color: ${(props) => props.theme.inactive};
+        color: ${theme.inactive};
     }
     &:focus {
-        background-color: ${(props) => props.theme.inactive};
+        background-color: ${theme.inactive};
     }
     box-sizing: border-box;
     @media (max-width: 480px) {
         display: flex;
         width: auto;
         flex-grow: 1;
-        font-size: ${(props) => (props.square ? `${metrics.regularText}px` : `${metrics.smallText}px`)};
+        font-size: ${(props) => (props.square ? `${theme.metrics.regularText}px` : `${theme.metrics.smallText}px`)};
     }
+    `}
 `
 export default GlobalStyle

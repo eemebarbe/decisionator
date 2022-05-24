@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react"
 import { Button, ProgressBar, Header, BodyWrapper } from "./components"
 import styled, { ThemeProvider } from "styled-components"
+import theme from "./themes"
 import { UserContext } from "./contexts/userContext"
-import { colors, metrics } from "./themes"
 import GlobalStyle from "./themes/GlobalStyle"
 import Properties from "./pages/Properties"
 import Options from "./pages/Options"
@@ -78,7 +78,7 @@ function App() {
     }
 
     return (
-        <ThemeProvider theme={styleMode && styleMode === "dark" ? colors.dark : colors.main}>
+        <ThemeProvider theme={theme(styleMode)}>
             <GlobalStyle />
             <Header />
             <BodyWrapper scroll={triggerScroll} resetTrigger={() => setTriggerScroll(false)}>
@@ -96,6 +96,7 @@ const Alignment = styled.div`
 `
 
 const Navigation = styled.div`
+    ${({ theme }) => `
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -103,21 +104,22 @@ const Navigation = styled.div`
     justify-content: center;
     align-items: center;
     div {
-        box-shadow: ${(props) => `0 1px ${metrics.baseUnit / 2}px 0 ${props.theme.shadow}`};
-        width: ${metrics.bodyWidth}px;
-        background-color: ${(props) => props.theme.secondLayerBackground};
+        box-shadow: 0 1px ${theme.metrics.baseUnit / 2}px 0 ${theme.shadow};
+        width: ${theme.metrics.bodyWidth}px;
+        background-color: ${theme.secondLayerBackground};
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: ${metrics.baseUnit * 12}px;
-        border-radius: ${metrics.globalBorderRadius}px;
-        margin-bottom: ${metrics.baseUnit * 3}px;
-        padding: ${metrics.baseUnit * 3}px;
+        height: ${theme.metrics.baseUnit * 12}px;
+        border-radius: ${theme.metrics.globalBorderRadius}px;
+        margin-bottom: ${theme.metrics.baseUnit * 3}px;
+        padding: ${theme.metrics.baseUnit * 3}px;
         @media (max-width: 480px) {
             margin-bottom: 0;
             border-radius: 0;
         }
     }
+    `}
 `
 
 export default App
