@@ -1,24 +1,29 @@
 import React from "react"
 import styled from "styled-components"
-import { metrics } from "../themes"
 
 const Bar = styled.div`
-    position: absolute;
-    height: ${metrics.baseUnit}px;
-    width: 100%;
-    background-color: ${(props) => props.theme.inactive};
-    border-radius: ${metrics.globalBorderRadius}px;
+    ${({ theme }) => `
+        position: absolute;
+        height: ${theme.metrics.baseUnit}px;
+        width: 100%;
+        background-color: ${theme.inactive};
+        border-radius: ${theme.metrics.globalBorderRadius}px;
+    `}
 `
 
 const Steps = styled(Bar)`
-    background-color: ${(props) => props.theme.primaryButton};
-    width: ${(props) => 100 * ((props.current + 1) / props.length)}%;
+    ${({ current, length, theme }) => `
+        background-color: ${theme.primaryButton};
+        width: ${100 * ((current + 1) / length)}%;
+    `}
 `
 
 const Container = styled.div`
-    position: relative;
-    height: ${metrics.baseUnit}px;
-    margin-bottom: ${(props) => (props.marginBottom ? `${metrics.baseUnit * 3}px` : `${metrics.baseUnit}px`)};
+    ${({ marginBottom, theme }) => `
+        position: relative;
+        height: ${theme.metrics.baseUnit}px;
+        margin-bottom: ${marginBottom ? `${theme.metrics.baseUnit * 3}px` : `${theme.metrics.baseUnit}px`};
+    `}
 `
 
 const GraphBar = (props) => {

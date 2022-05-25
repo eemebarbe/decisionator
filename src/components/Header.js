@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { metrics } from "../themes"
 
 const HeaderWithRouter = (props) => {
     const url = "github.com/eemebarbe/decisionator"
@@ -13,45 +12,51 @@ const HeaderWithRouter = (props) => {
 }
 
 const Header = styled.div`
-    transform: translateY(${(props) => "-" + props.scrollTop}px);
+    ${({ theme, scrollTop }) => `
+    transform: translateY(${"-" + scrollTop}px);
     z-index: 8;
     position: fixed;
     top: 0;
-    background-color: ${(props) => props.theme.secondLayerBackground};
+    background-color: ${theme.secondLayerBackground};
     width: 100%;
-    height: ${metrics.headerHeight}px;
+    height: ${theme.metrics.headerHeight}px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: ${(props) => `0 1px ${metrics.baseUnit / 2}px 0 ${props.theme.shadow}`};
+    box-shadow: ${`0 1px ${theme.metrics.baseUnit / 2}px 0 ${theme.shadow}`};
     @media (max-width: 480px) {
-        height: ${metrics.baseUnit * 6}px;
+        height: ${theme.metrics.baseUnit * 6}px;
     }
+    `}
 `
 
 const HeaderInner = styled.div`
-    margin: 0px ${metrics.bodyPadding}px;
-    width: ${metrics.bodyWidth}px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    div {
+    ${({ theme }) => `
+        margin: 0px ${theme.metrics.bodyPadding}px;
+        width: ${theme.metrics.bodyWidth}px;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-    }
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    `}
 `
 
 const CompanyLogo = styled.button`
-    color: ${(props) => props.theme.mainText};
-    background-color: ${(props) => props.theme.secondLayerBackground};
-    pointer-events: ${(props) => (props.samePath ? "none" : "initial")};
-    border: 0;
-    outline: none;
-    padding: 0;
-    cursor: pointer;
-    outline: 0;
-    font-size: ${metrics.smallText}px;
+    ${({ theme, samePath }) => `
+        color: ${theme.mainText};
+        background-color: ${theme.secondLayerBackground};
+        pointer-events: ${samePath ? "none" : "initial"};
+        border: 0;
+        outline: none;
+        padding: 0;
+        cursor: pointer;
+        outline: 0;
+        font-size: ${theme.metrics.smallText}px;
+    `}
 `
 
 export default HeaderWithRouter

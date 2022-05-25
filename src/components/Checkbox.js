@@ -1,71 +1,74 @@
-import React from "react";
-import styled from "styled-components";
-import { metrics } from "../themes";
+import React from "react"
+import styled from "styled-components"
 
 const CheckboxWrapper = styled.div`
-    display: flex;
-    height: ${metrics.baseUnit * 3}px;
-    font-size: ${metrics.smallText}px;
-    align-items: center;
-    margin-bottom: ${metrics.baseUnit * 1}px;
-`;
+    ${({ theme }) => `
+        display: flex;
+        height: ${theme.metrics.baseUnit * 3}px;
+        font-size: ${theme.metrics.smallText}px;
+        align-items: center;
+        margin-bottom: ${theme.metrics.baseUnit * 1}px;
+    `}
+`
 
 const Button = styled.span`
-    height: ${metrics.baseUnit * 2}px;
-    width: ${metrics.baseUnit * 2}px;
-    background-color: ${(props) => props.theme.inactive};
-    border-radius: ${metrics.baseUnit / 4}px;
-`;
+    ${({ theme }) => `
+        height: ${theme.metrics.baseUnit * 2}px;
+        width: ${theme.metrics.baseUnit * 2}px;
+        background-color: ${theme.inactive};
+        border-radius: ${theme.metrics.baseUnit / 4}px;
+    `}
+`
 
 const Input = styled.input`
-    background-color: transparent;
-    color: ${(props) => props.theme.mainText};
-    border: none;
-    border-radius: 0;
-    outline: none;
-    margin: 0;
-    padding: 0;
-    appearance: none;
-    font-size: ${metrics.regularText}px;
-    &::placeholder {
-        color: ${(props) => props.theme.inactive};
-    }
-    &:focus {
-        border-bottom: 1px solid ${(props) => props.theme.mainText};
-    }
-    &:checked ~ ${Button} {
-        background-color: ${(props) => props.theme.primaryButton};
-    }
-`;
+    ${({ theme }) => `
+        background-color: transparent;
+        color: ${theme.mainText};
+        border: none;
+        border-radius: 0;
+        outline: none;
+        margin: 0;
+        padding: 0;
+        appearance: none;
+        font-size: ${theme.metrics.regularText}px;
+        &::placeholder {
+            color: ${theme.inactive};
+        }
+        &:focus {
+            border-bottom: 1px solid ${theme.mainText};
+        }
+        &:checked ~ ${Button} {
+            background-color: ${theme.primaryButton};
+        }
+    `}
+`
 
 const Label = styled.label`
-    margin: none;
-    margin-right: ${metrics.baseUnit * 2}px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    font-size: ${metrics.regularText}px;
-`;
+    ${({ theme }) => `
+        margin: none;
+        margin-right: ${theme.metrics.baseUnit * 2}px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        font-size: ${theme.metrics.regularText}px;
+    `}
+`
 
 const Checkbox = (props) => {
     return (
         <CheckboxWrapper>
             <Label>
-                <Input
-                    onChange={props.onChange}
-                    type="checkbox"
-                    name={props.name}
-                />
+                <Input onChange={props.onChange} type="checkbox" name={props.name} />
                 <Button />
             </Label>
             <span>{props.label}</span>
         </CheckboxWrapper>
-    );
-};
+    )
+}
 
-export default Checkbox;
+export default Checkbox

@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from "react"
 import styled from "styled-components"
 import { Form, H1, Input, Slider, Button, Card, P } from "../components"
-import { metrics } from "../themes"
 import { UserContext } from "../contexts/userContext"
 import { Property } from "../interfaces"
 import useWindowSize from "../hooks/windowSizeHook"
@@ -102,13 +101,15 @@ const Alignment = styled.div`
 `
 
 const Weight = styled.div`
-    width: ${metrics.baseUnit * 6}px;
-    margin-left: ${metrics.baseUnit * 3}px;
-    margin-bottom: ${metrics.baseUnit * 3}px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: ${metrics.H2}px;
+    ${({ theme }) => `
+        width: ${theme.metrics.baseUnit * 6}px;
+        margin-left: ${theme.metrics.baseUnit * 3}px;
+        margin-bottom: ${theme.metrics.baseUnit * 3}px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: ${theme.metrics.H2}px;
+    `}
 `
 
 export default CreateProperties

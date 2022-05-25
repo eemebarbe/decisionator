@@ -1,6 +1,5 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
-import { metrics } from "../themes"
 
 const rotate = keyframes`
   from {
@@ -13,30 +12,29 @@ const rotate = keyframes`
 `
 
 const SpinnerTemplate = styled.div`
-    border-radius: 50%;
-    width: ${(props) =>
-        props.large ? metrics.baseUnit * 12 : metrics.baseUnit * 2}px;
-    height: ${(props) =>
-        props.large ? metrics.baseUnit * 12 : metrics.baseUnit * 2}px;
-    position: absolute;
+    ${({ theme, large }) => `
+        border-radius: 50%;
+        width: ${large ? theme.metrics.baseUnit * 12 : theme.metrics.baseUnit * 2}px;
+        height: ${large ? theme.metrics.baseUnit * 12 : theme.metrics.baseUnit * 2}px;
+        position: absolute;
+    `}
 `
 
 const Circle = styled(SpinnerTemplate)`
-    border: 3px solid
-        ${(props) =>
-            (props.secondary && props.theme.inactive) ||
-            props.theme.detailText};
-    opacity: 0.33;
-    visibility: visible;
+    ${({ theme, secondary }) => `
+        border: 3px solid
+            ${(secondary && theme.inactive) || theme.detailText};
+        opacity: 0.33;
+        visibility: visible;
+    `}
 `
 
 const Highlight = styled(SpinnerTemplate)`
-    border: 3px solid rgba(0, 0, 0, 0);
-    border-top: 3px solid
-        ${(props) =>
-            (props.secondary && props.theme.inactive) ||
-            props.theme.detailText};
-    animation: ${rotate} 1s infinite ease-in-out;
+    ${({ theme, secondary }) => `
+        border: 3px solid rgba(0, 0, 0, 0);
+        border-top: 3px solid ${(secondary && theme.inactive) || theme.detailText};
+        animation: ${rotate} 1s infinite ease-in-out;
+    `}
 `
 
 const Spinner = (props) => {
