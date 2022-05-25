@@ -1,9 +1,9 @@
 import styled from "styled-components"
 
-const HeaderWithRouter = (props) => {
+const HeaderWithRouter = () => {
     const url = "github.com/eemebarbe/decisionator"
     return (
-        <Header {...props}>
+        <Header>
             <HeaderInner>
                 <CompanyLogo onClick={() => window.open("https://www." + url, "_blank")}>{url}</CompanyLogo>
             </HeaderInner>
@@ -12,8 +12,7 @@ const HeaderWithRouter = (props) => {
 }
 
 const Header = styled.div`
-    ${({ theme, scrollTop }) => `
-    transform: translateY(${"-" + scrollTop}px);
+    ${({ theme }) => `
     z-index: 8;
     position: fixed;
     top: 0;
@@ -46,10 +45,9 @@ const HeaderInner = styled.div`
 `
 
 const CompanyLogo = styled.button`
-    ${({ theme, samePath }) => `
+    ${({ theme }) => `
         color: ${theme.mainText};
         background-color: ${theme.secondLayerBackground};
-        pointer-events: ${samePath ? "none" : "initial"};
         border: 0;
         outline: none;
         padding: 0;

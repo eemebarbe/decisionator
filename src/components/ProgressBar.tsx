@@ -2,6 +2,22 @@ import React from "react"
 import styled from "styled-components"
 import GraphBar from "./GraphBar"
 
+interface Props {
+    current: number
+    length: number
+}
+
+const ProgressBar = (props: Props) => {
+    return (
+        <Container>
+            <p>
+                {props.current + 1}/{props.length}
+            </p>
+            <GraphBar {...props} />
+        </Container>
+    )
+}
+
 const Container = styled.div`
     ${({ theme }) => `
         p {
@@ -12,16 +28,5 @@ const Container = styled.div`
         }
     `}
 `
-
-const ProgressBar = (props) => {
-    return (
-        <Container>
-            <p>
-                {props.current + 1}/{props.length}
-            </p>
-            <GraphBar {...props} />
-        </Container>
-    )
-}
 
 export default ProgressBar

@@ -1,7 +1,7 @@
 import colors from "./colors"
 import metrics from "./metrics"
 
-export default (colorScheme) => {
+export default (colorScheme: string) => {
     return { ...colors[colorScheme], metrics }
 }
 

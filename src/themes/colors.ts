@@ -27,8 +27,8 @@ const dark = {
 }
 
 const colors = {
-    main: main,
-    dark: dark,
+    main,
+    dark,
 }
 
 export default colors

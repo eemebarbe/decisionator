@@ -1,6 +1,35 @@
 import { createGlobalStyle, css } from "styled-components"
 
-export const GlobalStyle = createGlobalStyle`
+interface ThemeProps {
+    metrics: {
+        baseUnit: number
+        baseFontUnit: number
+        globalBorderRadius: number
+        bodyWidth: () => void
+        bodyPadding: () => void
+        mobileMenuHeight: () => void
+        headerHeight: () => void
+        smallText: () => void
+        regularText: () => void
+        H1: () => void
+        H2: () => void
+        H1Mobile: () => void
+        animationLength: number
+    }
+    inactive: string
+    primaryButton: string
+    mainText: string
+    detailText: string
+    secondaryColor: string
+    background: string
+    overlayBackground: string
+    secondLayerBackground: string
+    highlight: string
+    overlayDetail: string
+    shadow: string
+}
+
+export const GlobalStyle = createGlobalStyle<{ theme: ThemeProps }>`
   ${({ theme }) => `
   *, *:before, *:after { 
     box-sizing: border-box;
@@ -39,7 +68,18 @@ export const GlobalStyle = createGlobalStyle`
   }
   `}`
 
-export const inputStyles = css`
+export interface InputProps {
+    marginBottom?: boolean
+    marginLeft?: boolean
+    marginRight?: boolean
+    marginTop?: boolean
+    square?: boolean
+    value?: string
+    placeholder?: string
+    onChange?: (e: React.FormEvent<HTMLInputElement>) => void
+}
+
+export const inputStyles = css<InputProps>`
     ${({ theme, marginBottom, marginLeft, marginRight, marginTop, square }) => `
       background-color: ${theme.overlayBackground};
       color: ${theme.mainText};
