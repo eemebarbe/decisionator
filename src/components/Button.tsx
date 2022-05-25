@@ -1,13 +1,28 @@
 import React from "react"
 import styled from "styled-components"
-import { Spinner } from "../components"
 
-const Button = styled.button`
-    ${({ theme, disabled, loading, marginLeft, marginRight, marginBottom, marginTop, small, square }) => `
+interface Props {
+    disabled?: boolean
+    children: string
+    marginLeft?: boolean
+    marginRight?: boolean
+    marginTop?: boolean
+    marginBottom?: boolean
+    small?: boolean
+    square?: boolean
+    onClick: (e: React.SyntheticEvent) => void
+}
+
+const ButtonWithLoadState = (props: Props) => {
+    return <Button {...props}>{props.children}</Button>
+}
+
+const Button = styled.button<Props>`
+    ${({ theme, disabled, marginLeft, marginRight, marginBottom, marginTop, small, square }) => `
         height: ${theme.metrics.baseUnit * 6}px;
         width: ${small ? theme.metrics.baseUnit * 18 : theme.metrics.baseUnit * 30}px;
         background-color: ${disabled ? theme.inactive : theme.primaryButton};
-        pointer-events: ${disabled || loading ? "none" : "auto"};
+        pointer-events: "auto";
         color: ${theme.detailText};
         border: 0;
         padding: 0;
@@ -28,20 +43,5 @@ const Button = styled.button`
         }
     `}
 `
-
-const ButtonWithLoadState = (props) => {
-    const loadState = () => {
-        if (props.loading) {
-            return <Spinner />
-        } else {
-            return props.children
-        }
-    }
-    return (
-        <Button disabled={props.disabled} loading={props.loading} {...props}>
-            {loadState()}
-        </Button>
-    )
-}
 
 export default ButtonWithLoadState
