@@ -1,31 +1,32 @@
 import React from "react"
 import styled from "styled-components"
-import { metrics } from "../themes"
 import { Spinner } from "../components"
 
 const Button = styled.button`
-    height: ${metrics.baseUnit * 6}px;
-    width: ${(props) => (props.small ? metrics.baseUnit * 18 : metrics.baseUnit * 30)}px;
-    background-color: ${(props) => (props.disabled ? props.theme.inactive : props.theme.primaryButton)};
-    pointer-events: ${(props) => (props.disabled || props.loading ? "none" : "auto")};
-    color: ${(props) => props.theme.detailText};
-    border: 0;
-    padding: 0;
-    border-radius: ${metrics.globalBorderRadius}px;
-    margin-left: ${(props) => (props.marginLeft ? `${metrics.baseUnit * 3}px` : 0)};
-    margin-right: ${(props) => (props.marginRight ? `${metrics.baseUnit * 3}px` : 0)};
-    margin-bottom: ${(props) => (props.marginBottom ? `${metrics.baseUnit * 3}px` : 0)};
-    margin-top: ${(props) => (props.marginTop ? `${metrics.baseUnit * 3}px` : 0)};
-    font-size: ${metrics.smallText}px;
-    cursor: pointer;
-    outline: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    @media (max-width: 480px) {
-        width: ${(props) => (props.square ? `${metrics.baseUnit * 6}px` : `100%`)};
-        font-size: ${(props) => (props.square ? `${metrics.regularText}px` : `${metrics.smallText}px`)};
-    }
+    ${({ theme, disabled, loading, marginLeft, marginRight, marginBottom, marginTop, small, square }) => `
+        height: ${theme.metrics.baseUnit * 6}px;
+        width: ${small ? theme.metrics.baseUnit * 18 : theme.metrics.baseUnit * 30}px;
+        background-color: ${disabled ? theme.inactive : theme.primaryButton};
+        pointer-events: ${disabled || loading ? "none" : "auto"};
+        color: ${theme.detailText};
+        border: 0;
+        padding: 0;
+        border-radius: ${theme.metrics.globalBorderRadius}px;
+        margin-left: ${marginLeft ? `${theme.metrics.baseUnit * 3}px` : 0};
+        margin-right: ${marginRight ? `${theme.metrics.baseUnit * 3}px` : 0};
+        margin-bottom: ${marginBottom ? `${theme.metrics.baseUnit * 3}px` : 0};
+        margin-top: ${marginTop ? `${theme.metrics.baseUnit * 3}px` : 0};
+        font-size: ${theme.metrics.smallText}px;
+        cursor: pointer;
+        outline: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @media (max-width: 480px) {
+            width: ${square ? `${theme.metrics.baseUnit * 6}px` : `100%`};
+            font-size: ${square ? `${theme.metrics.regularText}px` : `${theme.metrics.smallText}px`};
+        }
+    `}
 `
 
 const ButtonWithLoadState = (props) => {

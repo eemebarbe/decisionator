@@ -97,28 +97,28 @@ const Alignment = styled.div`
 
 const Navigation = styled.div`
     ${({ theme }) => `
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    div {
-        box-shadow: 0 1px ${theme.metrics.baseUnit / 2}px 0 ${theme.shadow};
-        width: ${theme.metrics.bodyWidth}px;
-        background-color: ${theme.secondLayerBackground};
+        position: fixed;
+        bottom: 0;
+        width: 100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        height: ${theme.metrics.baseUnit * 12}px;
-        border-radius: ${theme.metrics.globalBorderRadius}px;
-        margin-bottom: ${theme.metrics.baseUnit * 3}px;
-        padding: ${theme.metrics.baseUnit * 3}px;
-        @media (max-width: 480px) {
-            margin-bottom: 0;
-            border-radius: 0;
+        div {
+            box-shadow: 0 1px ${theme.metrics.baseUnit / 2}px 0 ${theme.shadow};
+            width: ${theme.metrics.bodyWidth}px;
+            background-color: ${theme.secondLayerBackground};
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: ${theme.metrics.baseUnit * 12}px;
+            border-radius: ${theme.metrics.globalBorderRadius}px;
+            margin-bottom: ${theme.metrics.baseUnit * 3}px;
+            padding: ${theme.metrics.baseUnit * 3}px;
+            @media (max-width: 480px) {
+                margin-bottom: 0;
+                border-radius: 0;
+            }
         }
-    }
     `}
 `
 

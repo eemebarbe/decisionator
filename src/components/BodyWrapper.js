@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from "react"
 import styled from "styled-components"
-import { metrics } from "../themes"
 
 const BodyOuter = styled.div`
     display: flex;
@@ -14,21 +13,25 @@ const BodyOuter = styled.div`
 `
 
 const BodyWrapper = styled.div`
-    margin-left: ${metrics.bodyPadding}px;
-    margin-right: ${(props) => metrics.bodyPadding - props.scrollbarWidth}px;
-    padding-top: ${metrics.headerHeight}px;
-    width: ${metrics.bodyWidth}px;
-    @media (max-width: 480px) {
-        width: 100%;
-        padding-top: ${metrics.baseUnit * 6}px;
-    }
+    ${({ theme, scrollbarWidth }) => `
+        margin-left: ${theme.metrics.bodyPadding}px;
+        margin-right: ${theme.metrics.bodyPadding - scrollbarWidth}px;
+        padding-top: ${theme.metrics.headerHeight}px;
+        width: ${theme.metrics.bodyWidth}px;
+        @media (max-width: 480px) {
+            width: 100%;
+            padding-top: ${theme.metrics.baseUnit * 6}px;
+        }
+    `}
 `
 
 const BodyInner = styled.div`
-    padding-bottom: ${metrics.headerHeight * 2}px;
-    @media (max-width: 480px) {
-        padding-bottom: ${metrics.headerHeight * 1.5}px;
-    }
+    ${({ theme }) => `
+        padding-bottom: ${theme.metrics.headerHeight * 2}px;
+        @media (max-width: 480px) {
+            padding-bottom: ${theme.metrics.headerHeight * 1.5}px;
+        }
+    `}
 `
 
 const Wrapper = (props) => {
