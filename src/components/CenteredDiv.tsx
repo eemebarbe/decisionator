@@ -1,6 +1,11 @@
 import styled from "styled-components"
 
-const CenteredDiv = styled.div`
+interface Props {
+    vertical: boolean
+    horizontal: boolean
+}
+
+const CenteredDiv = styled.div<Props>`
     ${({ vertical, horizontal }) => `
         position: relative;
         z-index: 40;

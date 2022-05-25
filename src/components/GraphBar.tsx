@@ -1,6 +1,21 @@
 import React from "react"
 import styled from "styled-components"
 
+interface Props {
+    marginBottom?: boolean
+    current: number
+    length: number
+}
+
+const GraphBar = (props: Props) => {
+    return (
+        <Container {...props}>
+            <Bar />
+            <Steps {...props} />
+        </Container>
+    )
+}
+
 const Bar = styled.div`
     ${({ theme }) => `
         position: absolute;
@@ -11,28 +26,28 @@ const Bar = styled.div`
     `}
 `
 
-const Steps = styled(Bar)`
+interface StepsProps {
+    current: number
+    length: number
+}
+
+const Steps = styled(Bar)<StepsProps>`
     ${({ current, length, theme }) => `
         background-color: ${theme.primaryButton};
         width: ${100 * ((current + 1) / length)}%;
     `}
 `
 
-const Container = styled.div`
+interface ContainerProps {
+    marginBottom?: boolean
+}
+
+const Container = styled.div<ContainerProps>`
     ${({ marginBottom, theme }) => `
         position: relative;
         height: ${theme.metrics.baseUnit}px;
         margin-bottom: ${marginBottom ? `${theme.metrics.baseUnit * 3}px` : `${theme.metrics.baseUnit}px`};
     `}
 `
-
-const GraphBar = (props) => {
-    return (
-        <Container {...props}>
-            <Bar />
-            <Steps {...props} />
-        </Container>
-    )
-}
 
 export default GraphBar

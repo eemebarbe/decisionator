@@ -14,7 +14,7 @@ function App() {
     const [page, setPage] = useState(0)
     const [triggerScroll, setTriggerScroll] = useState(false)
     const [startQuestionnaire, setStartQuestionnaire] = useState(false)
-    const styleMode = window.localStorage.getItem("styleMode")
+    const styleMode = window.localStorage.getItem("styleMode") || ""
     const { userState } = useContext(UserContext)
 
     useEffect(() => {

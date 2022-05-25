@@ -26,7 +26,23 @@ const dark = {
     shadow: "rgb(0, 0, 0)",
 }
 
-const colors = {
+interface Colors {
+    [key: string]: {
+        inactive: string
+        primaryButton: string
+        mainText: string
+        detailText: string
+        secondaryColor: string
+        background: string
+        overlayBackground: string
+        secondLayerBackground: string
+        highlight: string
+        overlayDetail: string
+        shadow: string
+    }
+}
+
+const colors: Colors = {
     main,
     dark,
 }
